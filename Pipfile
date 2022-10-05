@@ -9,6 +9,7 @@ uvicorn = {extras = ["standard"], version = "*"}
 sklearn = "*"
 pandas = "*"
 numpy = "*"
+boto3 = "*"
 
 [dev-packages]
 flake8 = "*"
