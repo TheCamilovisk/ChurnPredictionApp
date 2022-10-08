@@ -9,4 +9,4 @@ COPY . .
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
-CMD [ "uvicorn", "churn_api:app", "--host", "0.0.0.0", "--port", "8000" ]
+CMD ["sh", "-c", "python download_model.py && uvicorn churn_api:app --host 0.0.0.0 --port 8000"]
