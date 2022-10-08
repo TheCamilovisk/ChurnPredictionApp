@@ -9,7 +9,6 @@ from ..models import Payload
 import config
 
 lr_model = load(config.MODEL_LOCAL_PATH)
-target_encoder = load(config.TARGET_ENCODER_LOCAL_PATH)
 
 router = APIRouter(prefix="/predict", tags=["predict"])
 
@@ -28,9 +27,7 @@ def payload_to_input(payload: List[Payload]) -> pd.DataFrame:
 @router.post("/")
 async def predict_churn_list(payload: List[Payload]):
     model_input = payload_to_input(payload)
-    predictions = target_encoder.inverse_transform(
-        lr_model.predict(model_input)
-    ).tolist()
+    predictions = ["Yes" if v == 1 else "No" for v in lr_model.predict(model_input)]
     output = [
         {row.customerID: prediction} for row, prediction in zip(payload, predictions)
     ]
