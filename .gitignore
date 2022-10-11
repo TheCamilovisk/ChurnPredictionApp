@@ -131,11 +131,3 @@ dmypy.json
 # VSCode files
 .vscode
 .vscode/
-
-# "models" folder
-models
-models/
-
-# "data" folder
-data
-data/

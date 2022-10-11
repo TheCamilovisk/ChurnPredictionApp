@@ -132,14 +132,6 @@ dmypy.json
 .vscode
 .vscode/
 
-# "models" folder
-models
-models/
-
-# "data" folder
-data
-data/
-
 # Git files
 .git
 .gitignore
