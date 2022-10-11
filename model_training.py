@@ -1,12 +1,11 @@
-import boto3
+import os
+
 import joblib
 import pandas as pd
 from sklearn.compose import make_column_transformer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import LabelBinarizer, MinMaxScaler, OneHotEncoder
-
-import config
 
 if __name__ == "__main__":
     churn_df = pd.read_csv("data/WA_Fn-UseC_-Telco-Customer-Churn.csv")
@@ -52,11 +51,7 @@ if __name__ == "__main__":
 
     model_pipeline.fit(churn_df, target)
 
-    joblib.dump(model_pipeline, config.MODEL_LOCAL_PATH)
-    joblib.dump(churn_transformer, config.TARGET_ENCODER_LOCAL_PATH)
+    if not os.path.isdir("models"):
+        os.makedirs("models")
 
-    s3_resource = boto3.resource("s3")
-    s3_bucket = s3_resource.Bucket(config.BUCKET_NAME)
-
-    s3_bucket.upload_file(config.MODEL_LOCAL_PATH, config.MODEL_PATH)
-    s3_bucket.upload_file(config.TARGET_ENCODER_LOCAL_PATH, config.TARGET_ENCODER_PATH)
+    joblib.dump(model_pipeline, "models/lr_model.joblib")
