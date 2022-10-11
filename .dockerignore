@@ -142,3 +142,11 @@ dmypy.json
 # Docker files
 Dockerfile
 .dockerignore
+
+# Models folder
+models
+models/
+
+# Data folder
+data
+data/
