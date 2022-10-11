@@ -3,12 +3,11 @@ from typing import List
 
 import pandas as pd
 from fastapi import APIRouter
-from joblib import load
 
 from ..models import Payload
-import config
+from ..utils import load_churn_model
 
-lr_model = load(config.MODEL_LOCAL_PATH)
+lr_model = load_churn_model()
 
 router = APIRouter(prefix="/predict", tags=["predict"])
 
@@ -25,7 +24,7 @@ def payload_to_input(payload: List[Payload]) -> pd.DataFrame:
 
 
 @router.post("/")
-async def predict_churn_list(payload: List[Payload]):
+async def predict_churn_list(payload: List[Payload]) -> dict:
     model_input = payload_to_input(payload)
     predictions = ["Yes" if v == 1 else "No" for v in lr_model.predict(model_input)]
     output = [

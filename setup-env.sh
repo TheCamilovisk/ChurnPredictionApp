@@ -17,5 +17,4 @@ vars_to_env "$variables"
 
 export PIPENV_VERBOSITY=-1
 
-python download_model.py
 uvicorn churn_api:app --host 0.0.0.0 --port 8000
