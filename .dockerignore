@@ -150,3 +150,7 @@ models/
 # Data folder
 data
 data/
+
+# Html folder
+html
+html/
