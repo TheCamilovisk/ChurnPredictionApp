@@ -9,11 +9,6 @@ class Gender(str, Enum):
     female = "Female"
 
 
-class SeniorCitizen(int, Enum):
-    no = 0
-    yes = 1
-
-
 class BooleanMeta(str, Enum):
     no = "No"
     yes = "Yes"
@@ -53,7 +48,7 @@ class PaymentMethod(str, Enum):
 class Payload(BaseModel):
     customerID: Optional[str]
     gender: Gender
-    SeniorCitizen: SeniorCitizen
+    SeniorCitizen: BooleanMeta
     Partner: BooleanMeta
     Dependents: BooleanMeta
     tenure: int

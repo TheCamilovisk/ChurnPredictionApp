@@ -11,9 +11,11 @@ if __name__ == "__main__":
     churn_df = pd.read_csv("data/WA_Fn-UseC_-Telco-Customer-Churn.csv")
     churn_df.TotalCharges = pd.to_numeric(churn_df.TotalCharges, errors="coerce")
     churn_df.dropna(axis="rows", inplace=True)
+    churn_df.SeniorCitizen = churn_df.SeniorCitizen.apply(lambda val: "Yes" if val else "No")
 
     categorical_features = [
         "gender",
+        "SeniorCitizen",
         "Partner",
         "Dependents",
         "PhoneService",
@@ -31,7 +33,6 @@ if __name__ == "__main__":
     ]
 
     numerical_features = [
-        "SeniorCitizen",
         "MonthlyCharges",
         "TotalCharges",
         "tenure",
