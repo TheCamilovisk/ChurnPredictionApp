@@ -32,62 +32,60 @@
     </div>
 
     <div>
-        <input type="checkbox" name="PhoneService" id="PhoneService">
+        <input type="checkbox" name="PhoneService" id="PhoneService" onchange="checkPhoneServices()">
         <label for="PhoneService">Phone Service</label>
     </div>
 
     <div>
-        <select name="MultipleLines" id="MultipleLines">
-            <option value="No phone service">No phone service</option>
+        <select name="MultipleLines" id="MultipleLines" dependency="PhoneService">
         </select>
         <label for="MultipleLines">Multiple Lines</label>
     </div>
 
     <div>
-        <select name="InternetService" id="InternetService">
-            <option value="No internet service">No internet service</option>
+        <select name="InternetService" id="InternetService" onchange="checkInternetServices()">
         </select>
         <label for="InternetService">Internet Service</label>
     </div>
 
     <div>
-        <select name="OnlineSecurity" id="OnlineSecurity">
-            <option value="No internet service">No internet service</option>
+        <select name="OnlineSecurity" id="OnlineSecurity" dependency="InternetService">
         </select>
         <label for="OnlineSecurity">Online Security</label>
     </div>
 
     <div>
-        <select name="OnlineBackup" id="OnlineBackup">
-            <option value="No internet service">No internet service</option>
+        <select name="OnlineBackup" id="OnlineBackup" dependency="InternetService">
         </select>
         <label for="OnlineBackup">Online Backup</label>
     </div>
 
     <div>
-        <select name="DeviceProtection" id="DeviceProtection">
-            <option value="No internet service">No internet service</option>
+        <select name="DeviceProtection" id="DeviceProtection" dependency="InternetService">
         </select>
         <label for="DeviceProtection">Device Protection</label>
     </div>
 
     <div>
-        <select name="TechSupport" id="TechSupport">
-            <option value="No internet service">No internet service</option>
+        <select name="TechSupport" id="TechSupport" dependency="InternetService">
         </select>
         <label for="TechSupport">Tech Support</label>
     </div>
 
     <div>
-        <select name="StreamingTV" id="StreamingTV">
-            <option value="No internet service">No internet service</option>
+        <select name="StreamingTV" id="StreamingTV" dependency="InternetService">
         </select>
         <label for="StreamingTV">Streaming TV</label>
     </div>
 
     <div>
+        <select name="StreamingMovies" id="StreamingMovies" dependency="InternetService">
+        </select>
+        <label for="StreamingMovies">Streaming Movies</label>
+    </div>
+
+    <div>
         <select name="Contract" id="Contract">
-            <option value="Month-to-month">Month-to-month</option>
         </select>
         <label for="Contract">Contract</label>
     </div>
@@ -99,7 +97,6 @@
 
     <div>
         <select name="PaymentMethod" id="PaymentMethod">
-            <option value="Electronic check">Electronic check</option>
         </select>
         <label for="PaymentMethod">Payment Method</label>
     </div>
