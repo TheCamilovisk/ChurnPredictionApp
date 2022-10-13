@@ -21,15 +21,15 @@ class InternetService(str, Enum):
 
 
 class PhoneDependentService(str, Enum):
+    no_service = "No phone service"
     no = "No"
     yes = "Yes"
-    no_service = "No phone service"
 
 
 class InternetDependentService(str, Enum):
+    no_service = "No internet service"
     no = "No"
     yes = "Yes"
-    no_service = "No internet service"
 
 
 class Contract(str, Enum):
