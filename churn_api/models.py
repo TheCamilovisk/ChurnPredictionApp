@@ -35,7 +35,7 @@ class InternetDependentService(str, Enum):
 class Contract(str, Enum):
     monthly = "Month-to-month"
     yealy = "One year"
-    two_year = "Two year Contract"
+    two_year = "Two year"
 
 
 class PaymentMethod(str, Enum):
