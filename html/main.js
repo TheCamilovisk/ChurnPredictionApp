@@ -22,7 +22,6 @@ const onPageLoad = () => {
 
     event.preventDefault();
   });
-  console.log("AKI1");
 };
 
 const addOptions = (elementId, optionsList) => {
