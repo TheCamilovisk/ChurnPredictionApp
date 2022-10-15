@@ -16,7 +16,7 @@ class BooleanMeta(str, Enum):
 
 class InternetService(str, Enum):
     no = "No"
-    fiber_optic = "Fiber Optic"
+    fiber_optic = "Fiber optic"
     dsl = "DSL"
 
 
