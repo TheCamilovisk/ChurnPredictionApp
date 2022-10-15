@@ -9,113 +9,155 @@
 </head>
 <h1>Churn Prediction App</h1>
 <body>
-    <div>
-        <input type="radio" name="gender" id="Male" value="male">
-        <label for="Male">Male</label>
-        <input type="radio" name="gender" id="Female" value="Female">
-        <label for="Female">Female</label>
-    </div>
+    <form" id="form" name="form" onsubmit="javascript:void(0)" method="post">
+        <div>
+            <label for="Male"><input type="radio" name="gender" id="Male" value="Male" required> Male</label>
+            <label for="Female"><input type="radio" name="gender" id="Female" value="Female"> Female</label>
+            <sup id="error"></sup>
+        </div>
 
-    <div>
-        <input type="checkbox" name="SeniorCitizen" id="SeniorCitizen">
-        <label for="SeniorCitizen">Senior Citizen</label>
-    </div>
+        <div>
+            <label for="SeniorCitizen">
+                <input type="checkbox" name="SeniorCitizen" id="SeniorCitizen">
+                Senior Citizen
+            </label>
+        </div>
 
-    <div>
-        <input type="checkbox" name="Partner" id="Partner">
-        <label for="Partner">Partner</label>
-    </div>
+        <div>
+            <label for="Partner">
+                <input type="checkbox" name="Partner" id="Partner">
+                Partner
+            </label>
+        </div>
 
-    <div>
-        <input type="checkbox" name="Dependents" id="Dependents">
-        <label for="Dependents">Dependents</label>
-    </div>
+        <div>
+            <label for="Dependents">
+                <input type="checkbox" name="Dependents" id="Dependents">
+                Dependents
+            </label>
+        </div>
 
-    <div>
-        <input type="checkbox" name="PhoneService" id="PhoneService" onchange="checkPhoneServices()">
-        <label for="PhoneService">Phone Service</label>
-    </div>
+        <div>
+            <label for="PhoneService">
+                <input type="checkbox" name="PhoneService" id="PhoneService" onchange="checkPhoneServices()">
+                Phone Service
+            </label>
+        </div>
 
-    <div>
-        <select name="MultipleLines" id="MultipleLines" dependency="PhoneService">
-        </select>
-        <label for="MultipleLines">Multiple Lines</label>
-    </div>
+        <div>
+            <label for="MultipleLines">
+                <select name="MultipleLines" id="MultipleLines" dependency="PhoneService">
+                </select>
+                Multiple Lines
+            </label>
+        </div>
 
-    <div>
-        <select name="InternetService" id="InternetService" onchange="checkInternetServices()">
-        </select>
-        <label for="InternetService">Internet Service</label>
-    </div>
+        <div>
+            <label for="InternetService">
+                <select name="InternetService" id="InternetService" onchange="checkInternetServices()">
+                </select>
+                Internet Service
+            </label>
+        </div>
 
-    <div>
-        <select name="OnlineSecurity" id="OnlineSecurity" dependency="InternetService">
-        </select>
-        <label for="OnlineSecurity">Online Security</label>
-    </div>
+        <div>
+            <label for="OnlineSecurity">
+                <select name="OnlineSecurity" id="OnlineSecurity" dependency="InternetService">
+                </select>
+                Online Security
+            </label>
+        </div>
 
-    <div>
-        <select name="OnlineBackup" id="OnlineBackup" dependency="InternetService">
-        </select>
-        <label for="OnlineBackup">Online Backup</label>
-    </div>
+        <div>
+            <label for="OnlineBackup">
+                <select name="OnlineBackup" id="OnlineBackup" dependency="InternetService">
+                </select>
+                Online Backup
+            </label>
+        </div>
 
-    <div>
-        <select name="DeviceProtection" id="DeviceProtection" dependency="InternetService">
-        </select>
-        <label for="DeviceProtection">Device Protection</label>
-    </div>
+        <div>
+            <label for="DeviceProtection">
+                <select name="DeviceProtection" id="DeviceProtection" dependency="InternetService">
+                </select>
+                Device Protection
+            </label>
+        </div>
 
-    <div>
-        <select name="TechSupport" id="TechSupport" dependency="InternetService">
-        </select>
-        <label for="TechSupport">Tech Support</label>
-    </div>
+        <div>
+            <label for="TechSupport">
+                <select name="TechSupport" id="TechSupport" dependency="InternetService">
+                </select>
+                Tech Support
+            </label>
+        </div>
 
-    <div>
-        <select name="StreamingTV" id="StreamingTV" dependency="InternetService">
-        </select>
-        <label for="StreamingTV">Streaming TV</label>
-    </div>
+        <div>
+            <label for="StreamingTV">
+                <select name="StreamingTV" id="StreamingTV" dependency="InternetService">
+                </select>
+                Streaming TV
+            </label>
+        </div>
 
-    <div>
-        <select name="StreamingMovies" id="StreamingMovies" dependency="InternetService">
-        </select>
-        <label for="StreamingMovies">Streaming Movies</label>
-    </div>
+        <div>
+            <label for="StreamingMovies">
+                <select name="StreamingMovies" id="StreamingMovies" dependency="InternetService">
+                </select>
+                Streaming Movies
+            </label>
+        </div>
 
-    <div>
-        <select name="Contract" id="Contract">
-        </select>
-        <label for="Contract">Contract</label>
-    </div>
+        <div>
+            <label for="Contract">
+                <select name="Contract" id="Contract">
+                </select>
+                Contract
+            </label>
+        </div>
 
-    <div>
-        <input type="checkbox" name="PaperlessBilling" id="PaperlessBilling">
-        <label for="PaperlessBilling">Paperless Billing</label>
-    </div>
+        <div>
+            <label for="PaperlessBilling">
+                <input type="checkbox" name="PaperlessBilling" id="PaperlessBilling">
+                Paperless Billing
+            </label>
+        </div>
 
-    <div>
-        <select name="PaymentMethod" id="PaymentMethod">
-        </select>
-        <label for="PaymentMethod">Payment Method</label>
-    </div>
+        <div>
+            <label for="PaymentMethod">
+                <select name="PaymentMethod" id="PaymentMethod">
+                </select>
+                Payment Method
+            </label>
+        </div>
 
-    <div>
-        <input type="text" name="tenure" id="tenure">
-        <label for="tenure">Tenure</label>
-    </div>
+        <div>
+            <label for="tenure">
+                <input type="text" name="tenure" id="tenure" value="0">
+                Tenure
+            </label>
+        </div>
 
-    <div>
-        <input type="text" name="MonthlyCharges" id="MonthlyCharges">
-        <label for="MonthlyCharges">Monthly Charges</label>
-    </div>
+        <div>
+            <label for="MonthlyCharges">
+                <input type="text" name="MonthlyCharges" id="MonthlyCharges" value="0">
+                Monthly Charges
+            </label>
+        </div>
 
-    <div>
-        <input type="text" name="TotalCharges" id="TotalCharges">
-        <label for="TotalCharges">Total Charges</label>
-    </div>
+        <div>
+            <label for="TotalCharges">
+                <input type="text" name="TotalCharges" id="TotalCharges" value="0">
+                Total Charges
+            </label>
+        </div>
+    </form>
+    <form id="churnForm">
+        <button>Predict</button>
+    </form>
+
+    <div>Will the customer churn? <span id="prediction" name="prediction"></span></div>
+
+    <script src="main.js"></script>
 </body>
-
-<script src="main.js"></script>
 </html>
