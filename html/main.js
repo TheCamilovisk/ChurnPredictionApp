@@ -126,7 +126,7 @@ const getFeatures = () => {
     MonthlyCharges: getFeatureValue("MonthlyCharges"),
     TotalCharges: getFeatureValue("TotalCharges"),
   };
-  return data;
+  return JSON.stringify([data]);
 };
 
 const cleanErrors = () => {
@@ -141,11 +141,11 @@ const showError = () => {
 
 const callPredictionApi = async () => {
   const url = "http://localhost:8000/predict";
-  const data = [getFeatures()];
+  const data = getFeatures();
   const prediction = fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: data,
   })
     .then((response) => response.json())
     .then((data) => showPrediction(data["predictions"]));
