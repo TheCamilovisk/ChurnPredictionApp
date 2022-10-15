@@ -5,7 +5,7 @@ from .. import models
 router = APIRouter(prefix="/features", tags=["features"])
 
 
-@router.get("/categorical")
+@router.get("/")
 async def get_categorical_features_values() -> dict:
     feature_values = {
         "MultipleLines": [e.value for e in models.PhoneDependentService],
