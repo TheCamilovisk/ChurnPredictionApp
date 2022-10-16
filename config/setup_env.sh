@@ -4,7 +4,7 @@ sudo amazon-linux-extras install -y nginx1
 sudo gpasswd -a ${USER} docker
 sudo gpasswd -a nginx ${USER}
 
-sudo cp /home/ec2-user/ChurnPredictionApp/config/nginx/default.conf /etc/nginx/config.d/default.conf
+sudo cp /home/ec2-user/ChurnPredictionApp/config/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 sudo chmod -R g+x /home/ec2-user/
 
