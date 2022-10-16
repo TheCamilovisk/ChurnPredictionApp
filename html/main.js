@@ -1,5 +1,5 @@
 const onPageLoad = () => {
-  const url = "http://localhost:8000/features";
+  const url = "/api/features";
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -140,7 +140,7 @@ const showError = () => {
 };
 
 const callPredictionApi = async () => {
-  const url = "http://localhost:8000/predict";
+  const url = "/api/predict";
   const data = getFeatures();
   const prediction = fetch(url, {
     method: "POST",
