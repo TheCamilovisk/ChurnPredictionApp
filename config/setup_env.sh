@@ -4,9 +4,9 @@ sudo amazon-linux-extras install -y nginx1
 sudo gpasswd -a ${USER} docker
 sudo gpasswd -a nginx ${USER}
 
-sudo cp ${HOME}/ChurPredictionApp/config/nginx/default.conf /etc/nginx/config.d/default.conf
+sudo cp /home/ec2-user/ChurPredictionApp/config/nginx/default.conf /etc/nginx/config.d/default.conf
 
-sudo chmod -R g+x ${HOME}
+sudo chmod -R g+x /home/ec2-user/
 
 sudo service nginx restart
 
