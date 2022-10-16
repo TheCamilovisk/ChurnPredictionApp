@@ -1,5 +1,5 @@
 sudo amazon-linux-extras install -y docker
-sudo amazon-linux-extras install -y nginx
+sudo amazon-linux-extras install -y nginx1
 
 sudo gpasswd -a ${USER} docker
 sudo gpasswd -a nginx ${USER}
