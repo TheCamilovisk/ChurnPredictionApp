@@ -1,0 +1,44 @@
+main {
+  margin: auto;
+  width: 70%;
+}
+
+.options {
+  flex-direction: row;
+  line-height: 23px;
+}
+
+.options .title {
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}
+
+.submit-form {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.submit {
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.result {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.prediction {
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  background-color: darkkhaki;
+  border-radius: 5px;
+  line-height: 50px;
+}
