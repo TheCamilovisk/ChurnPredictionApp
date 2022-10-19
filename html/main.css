@@ -4,16 +4,22 @@ main {
 }
 
 .options {
+  display: flex;
   flex-direction: row;
-  line-height: 23px;
+  margin: 5px 0 5px 0;
+  width: 100%;
 }
 
-.options .title {
-  font-weight: bold;
+input, select, label {
+  width: auto;
+  margin-left: 3px;
 }
 
 .error {
   color: red;
+  padding: 0 3px 0 3px;
+  font-weight: normal;
+  align-items: center;
 }
 
 .submit-form {
@@ -22,23 +28,48 @@ main {
   text-align: center;
 }
 
-.submit {
-  width: 150px;
-  height: 50px;
+.submit, .prediction {
+  width: 250px;
+  height: 75px;
+  margin: 0 auto;
+  font-size: larger;
+  font-weight: bold;
   border-radius: 5px;
+  line-height: 50px;
+  vertical-align: middle;
+  line-height: 75px;
+  border-color: transparent;
 }
 
-.result {
-  width: 100%;
-  text-align: center;
-  padding: 10px;
+.submit {
+  background-color: darkkhaki;
 }
 
 .prediction {
-  width: 150px;
-  height: 50px;
-  margin: 0 auto;
-  background-color: darkkhaki;
-  border-radius: 5px;
-  line-height: 50px;
+  background-color: beige;
+}
+
+.yes {
+  background-color: darkred;
+  color: white;
+}
+
+.no {
+  background-color: olivedrab;
+}
+
+@media (max-width: 480px) {
+  main {
+    width: 95%;
+  }
+
+  .options {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  label {
+    margin: 3px;
+    align-items: center;
+  }
 }

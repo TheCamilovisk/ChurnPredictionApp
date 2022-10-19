@@ -154,7 +154,11 @@ const callPredictionApi = async () => {
 
 const showPrediction = (predictions) => {
   const predictionTag = document.getElementById("prediction");
-  predictionTag.innerText = predictions[0][null];
+  predictionTag.classList.remove("yes");
+  predictionTag.classList.remove("no");
+  const prediction = predictions[0][null]
+  predictionTag.innerText = prediction.toUpperCase();
+  predictionTag.classList.add(prediction.toLowerCase());
 };
 
 window.onload = onPageLoad;
