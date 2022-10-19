@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  api:
+    image: churnprediction-api:latest
+    container_name: churn-api
+    network_mode: host
+    env_file:
+      - .env
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+  
+  webserver:
+    image: webserver
+    container_name: churn-webserver
+    depends_on:
+      - api
+    network_mode: host
+    volumes:
+      - /home/uluyac/workspace/ChurnPredictionAPI/html:/usr/share/nginx/html
