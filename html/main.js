@@ -1,7 +1,7 @@
 const onPageLoad = () => {
   const url = "/api/features";
   fetch(url)
-    .then((response) => response.json())
+    .then((response) => handleAPICallErrors(response).json())
     .then((data) => {
       const categoricalValues = data["categorical_feature_values"];
       Object.entries(categoricalValues).forEach(([elementId, optionsList]) => {
@@ -9,16 +9,22 @@ const onPageLoad = () => {
       });
 
       checkFields();
+    })
+    .catch((error) => {
+      showError("An error occurred in connecting to server.");
     });
   console.log("Paged loaded!");
 
   const form = document.getElementById("form");
   form.addEventListener("submit", (event) => {
     console.log("Submitted!");
+    cleanRequireds();
     cleanErrors();
     const gender = document.querySelector('input[name="gender"]:checked');
-    if (!gender) showError();
-    else callPredictionApi();
+    if (!gender) {
+      showRequired();
+      showError("Check the required features");
+    } else callPredictionApi();
 
     event.preventDefault();
   });
@@ -129,14 +135,30 @@ const getFeatures = () => {
   return JSON.stringify([data]);
 };
 
-const cleanErrors = () => {
-  const genderErrorTag = document.getElementById("error");
-  genderErrorTag.innerText = "";
+const cleanRequireds = () => {
+  const genderRequiredTag = document.getElementById("required");
+  genderRequiredTag.innerText = "";
 };
 
-const showError = () => {
-  const genderErrorTag = document.getElementById("error");
-  genderErrorTag.innerText = "Required";
+const cleanErrors = () => {
+  showError("");
+}
+
+const showRequired = () => {
+  const genderRequiredTag = document.getElementById("required");
+  genderRequiredTag.innerText = "Required";
+};
+
+const showError = (msg) => {
+  const errorsTag = document.getElementById("errors");
+  errorsTag.innerText = msg;
+};
+
+const handleAPICallErrors = (response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
 };
 
 const callPredictionApi = async () => {
@@ -147,8 +169,11 @@ const callPredictionApi = async () => {
     headers: { "Content-Type": "application/json" },
     body: data,
   })
-    .then((response) => response.json())
-    .then((data) => showPrediction(data["predictions"]));
+    .then((response) => handleAPICallErrors(response).json())
+    .then((data) => showPrediction(data["predictions"]))
+    .catch((error) => {
+      showError("An error occurred in connecting to server.");
+    });
   return prediction;
 };
 
@@ -156,7 +181,7 @@ const showPrediction = (predictions) => {
   const predictionTag = document.getElementById("prediction");
   predictionTag.classList.remove("yes");
   predictionTag.classList.remove("no");
-  const prediction = predictions[0][null]
+  const prediction = predictions[0][null];
   predictionTag.innerText = prediction.toUpperCase();
   predictionTag.classList.add(prediction.toLowerCase());
 };

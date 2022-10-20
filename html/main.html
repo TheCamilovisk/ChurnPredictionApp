@@ -10,9 +10,12 @@
 <body>
     <main class="center">
         <h1>Churn Prediction App</h1>
+
+        <p>* &#x2192; Required field</p>
+
         <form" id="form" name="form" onsubmit="javascript:void(0)" method="post">
             
-            <h3>Sex<sup id="error" class="error"></sup></h1>
+            <h3>Sex<sup>*</sup><sup id="required" class="required error"></sup></h1>
             <label for="Male"><input type="radio" name="gender" id="Male" value="Male" required> Male</label>
             <label for="Female"><input type="radio" name="gender" id="Female" value="Female"> Female</label>
 
@@ -133,6 +136,8 @@
             </div>
             </form>
             <form id="churnForm" class="submit-form">
+                <div id="errors" class="error">
+                </div>
                 <button class="submit">Predict</button>
                 <h3>Will the customer churn?</h3>
                 <div id="prediction" name="prediction" class="prediction"></div>
