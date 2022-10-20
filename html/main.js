@@ -11,7 +11,7 @@ const onPageLoad = () => {
       checkFields();
     })
     .catch((error) => {
-      showError("An error occurred in connecting to server.");
+      showError("An error occurred in connecting to server while trying to call the features endpoint.");
     });
   console.log("Paged loaded!");
 
@@ -172,7 +172,7 @@ const callPredictionApi = async () => {
     .then((response) => handleAPICallErrors(response).json())
     .then((data) => showPrediction(data["predictions"]))
     .catch((error) => {
-      showError("An error occurred in connecting to server.");
+      showError("An error occurred in connecting to server while trying to call the predict endpoint.");
     });
   return prediction;
 };
