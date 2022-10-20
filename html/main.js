@@ -15,7 +15,8 @@ const onPageLoad = () => {
     });
   console.log("Paged loaded!");
 
-  const form = document.getElementById("form");
+  const form = document.getElementById("churnForm");
+  console.log("AKI")
   form.addEventListener("submit", (event) => {
     console.log("Submitted!");
     cleanRequireds();

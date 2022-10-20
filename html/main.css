@@ -1,22 +1,76 @@
-main {
-  margin: auto;
-  width: 40%;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main,
+header,
+footer {
+  margin: 0 auto;
+  width: 80%;
+}
+
+h1 {
+  padding: 10px 10px;
+}
+
+h2 {
+  padding: 10px 0 10px 0;
+}
+
+p,
+input,
+label,
+select {
+  margin: 0 5px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+}
+
+footer {
+  padding: 30px 10px;
+  vertical-align: bottom;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.options-menu {
+  width: 100%;
+  padding: 20px 30px;
 }
 
 .options {
   display: flex;
   flex-direction: row;
-  margin: 5px 0 5px 0;
+}
+
+.option-item {
+  padding: 5px 5px;
   width: 100%;
+  display: flex;
+  flex-direction: columns;
 }
 
-input, select, label {
+.auto-resize {
   width: auto;
-  margin-left: 3px;
 }
 
-#errors {
-  padding: 10px 0 20px 0;
+.categorical,
+.numeric {
+  flex-direction: column;
 }
 
 .required {
@@ -27,15 +81,18 @@ input, select, label {
   color: red;
   font-weight: normal;
   align-items: center;
+  font-size: medium;
 }
 
-.submit-form {
-  width: 100%;
+.prediction-section {
   padding: 10px;
+  min-width: 400px;
   text-align: center;
+  vertical-align: middle;
 }
 
-.submit, .prediction {
+.submit,
+.prediction {
   width: 250px;
   height: 75px;
   margin: 0 auto;
@@ -65,8 +122,46 @@ input, select, label {
   background-color: olivedrab;
 }
 
-@media (max-width: 480px) {
+#errors {
+  padding: 10px 0 20px 0;
+}
+
+@media (max-width: 1350px) {
+  header,
+  main,
+  footer {
+    width: 85%;
+  }
+
+  .prediction-section {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 1060px) {
+  header,
+  main,
+  footer {
+    width: 90%;
+  }
+
   main {
+    flex-direction: column;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .prediction-section {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 635px) {
+  header,
+  main,
+  footer {
     width: 95%;
   }
 
