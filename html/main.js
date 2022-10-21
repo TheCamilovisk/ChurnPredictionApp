@@ -11,12 +11,14 @@ const onPageLoad = () => {
       checkFields();
     })
     .catch((error) => {
-      showError("An error occurred in connecting to server while trying to call the features endpoint.");
+      showError(
+        "An error occurred in connecting to server while trying to call the features endpoint."
+      );
     });
   console.log("Paged loaded!");
 
   const form = document.getElementById("churnForm");
-  console.log("AKI")
+  console.log("AKI");
   form.addEventListener("submit", (event) => {
     console.log("Submitted!");
     cleanRequireds();
@@ -29,6 +31,10 @@ const onPageLoad = () => {
 
     event.preventDefault();
   });
+
+  document
+    .getElementById("aboutBtn")
+    .addEventListener("click", showAbout, false);
 };
 
 const addOptions = (elementId, optionsList) => {
@@ -143,7 +149,7 @@ const cleanRequireds = () => {
 
 const cleanErrors = () => {
   showError("");
-}
+};
 
 const showRequired = () => {
   const genderRequiredTag = document.getElementById("required");
@@ -173,7 +179,9 @@ const callPredictionApi = async () => {
     .then((response) => handleAPICallErrors(response).json())
     .then((data) => showPrediction(data["predictions"]))
     .catch((error) => {
-      showError("An error occurred in connecting to server while trying to call the predict endpoint.");
+      showError(
+        "An error occurred in connecting to server while trying to call the predict endpoint."
+      );
     });
   return prediction;
 };
@@ -185,6 +193,16 @@ const showPrediction = (predictions) => {
   const prediction = predictions[0][null];
   predictionTag.innerText = prediction.toUpperCase();
   predictionTag.classList.add(prediction.toLowerCase());
+};
+
+const showAbout = () => {
+  console.log("AKI");
+  alert(
+    'This app was built during my endless fight to not be a full ignorant in programming. My goal is to have knowledge to be at least "dangerous" in web programming and rock solid in Machine Learning.' +
+      "\n\nBut I have to admit: I'm not a front-end developer. And since I spent too much time (years, more precisely) studyng algorithms and statistcs, I feel pretty much satisfied in building horrenduous but decently functional web interfaces to showcase my Machine Learning models." +
+      "\n\nSo, if you're wondering on how unconfortable you feel by looking at these fonts, colors and layout, then sit down, relax, drink some coffe (alchool is a better choice), blink a bunch of times, and simply get used to it." +
+      "\n\nMaybe (adverb that can indicate a certain tendency or possibility, although there is no certainty) one day I'll care more about how this thing looks, but I won't promise anything."
+  );
 };
 
 window.onload = onPageLoad;

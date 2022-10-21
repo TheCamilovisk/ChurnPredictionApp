@@ -9,22 +9,39 @@
   padding: 0;
 }
 
+body {
+  background-color: black;
+  color: white;
+}
+
 main,
 header,
 footer {
   margin: 0 auto;
   width: 80%;
+  height: auto;
+  background-color: slategray;
+}
+
+header {
+  height: 100px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
 }
 
 h1 {
-  padding: 10px 10px;
+  font-size: 74px;
 }
 
 h2 {
   padding: 10px 0 10px 0;
 }
 
-p,
+p {
+  padding: 5px;
+}
+
 input,
 label,
 select {
@@ -45,6 +62,7 @@ footer {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 100%;
 }
 
 .options-menu {
@@ -149,6 +167,10 @@ footer {
     flex-direction: column;
   }
 
+  h1 {
+    font-size: 55px;
+  }
+
   .container {
     flex-direction: column;
   }
@@ -165,13 +187,17 @@ footer {
     width: 95%;
   }
 
-  .options {
-    flex-direction: column;
-    margin: 0;
+  h1 {
+    font-size: 40px;
   }
 
   label {
     margin: 3px;
     align-items: center;
+  }
+
+  .options {
+    flex-direction: column;
+    margin: 0;
   }
 }
