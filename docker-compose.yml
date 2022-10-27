@@ -6,10 +6,7 @@ services:
     container_name: churn-api
     network_mode: host
     env_file:
-      - .env
-    environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - api/.env
   
   webserver:
     image: webserver
