@@ -4,6 +4,9 @@
 2. [Requirements](#requirements)
 3. [Installing the dependencies](#installing-the-dependecies)
 4. [How to run the server](#how-to-run-the-server)
+    - [Setting environment variables](#setting-environment-variables)
+    - [Install directly in the host machine](#install-directly-in-the-host-machine)
+    - [Run via Docker](#run-via-docker)
 
 ## Description
 
