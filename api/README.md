@@ -57,10 +57,18 @@ After installing the project, you must get the model `.joblib` file. For this, y
 - download the training [dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) into the _data_ folder (in the root directory), and run `python model_training.py`. This will create the model `.joblib` file inside the _model_ (also in root directory). You can also supply the `--buket-name` argument, passing the name of a existing S3 bucket name in which the model will be saved. This also enables our second option.
 - If you already have a model file saved in a S3 bucket and the [environment variables](#setting-environment-variables) set accordingly, then you are good to go.
 
-Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run `uvicorn churn_api:app` and the server will start. You can also supply the `--reload` argument, so the [FastAPI](https://fastapi.tiangolo.com/) framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
+Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run `uvicorn churn_api:app  --port 8000` and the server will start. You can also supply the `--reload` argument, so the [FastAPI](https://fastapi.tiangolo.com/) framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
 
 ### Run via Docker
 
 This is a good **deployment** option, as the dependencies installation and resource management is managed by Docker. You can also develop / customize the project in this mode, but this is not as straighforward.
 
 First you need to build the image with the command `docker build -t churnprediction-api:latest .`. After that run `docker run -it -p 8000:<HOST_PORT> -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> churnprediction-api:latest`, where `HOST_PORT` is the port in your host machine that you want to access the API through, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are[your AWS ID and secret](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). Note that for this execution option to work, you must to have a S3 bucket with a pre-trained model `.joblib` in it.
+
+## API documentation
+
+One of the most interesting features of [FastAPI](https://fastapi.tiangolo.com/) is that it automatically builds an [OpenAPI Specification](https://swagger.io/specification/) for your API without any additional action.
+
+With the API server running in your machine, in you browser, open the link `http://localhost:8000/docs`, and see the beatiful API documentation created by the framework.
+
+![Churn Prediction API documentation](../imgs/openapi-page.png)
