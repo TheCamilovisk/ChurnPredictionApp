@@ -71,4 +71,4 @@ One of the most interesting features of [FastAPI](https://fastapi.tiangolo.com/)
 
 With the API server running in your machine, in you browser, open the link `http://localhost:8000/docs`, and see the beatiful API documentation created by the framework.
 
-![Churn Prediction API documentation](../imgs/openapi-page.png)
+![Churn Prediction API documentation](https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png)
