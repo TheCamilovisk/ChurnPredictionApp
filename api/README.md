@@ -4,29 +4,29 @@
 2. [Requirements](#requirements)
 3. [Installing the dependencies](#installing-the-dependecies)
 4. [How to run the server](#how-to-run-the-server)
-    - [Setting environment variables](#setting-environment-variables)
-    - [Install directly in the host machine](#install-directly-in-the-host-machine)
-    - [Run via Docker](#run-via-docker)
+   - [Setting environment variables](#setting-environment-variables)
+   - [Install directly in the host machine](#install-directly-in-the-host-machine)
+   - [Run via Docker](#run-via-docker)
 
 ## Description
 
 This folder contains the isolated code for the ChurnPredictionAPP Rest API. You can choose to run this server independently of the web page UI. This way, the provided API endpoints can be used by any client (e.g.: a Mobile App).
 
-The server was built using [FastAPI](https://fastapi.tiangolo.com/), a modern, fast (high-performance) web framework for building APIs with Python. The model used to make inferences through the API endpoint was built using the [Scikit-Learn](https://scikit-learn.org/stable/) and [Numpy](https://numpy.org/) libraries, with help of [Pandas](https://pandas.pydata.org/) library to load the required dataset.
+The server was built using [FastAPI][fastapi], a modern, fast (high-performance) web framework for building APIs with Python. The model used to make inferences through the API endpoint was built using the [Scikit-Learn][sklearn] and [Numpy][numpy] libraries, with help of [Pandas][pandas] library to load the required dataset.
 
-Also, I used the [Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) dataset to train the model.
+Also, I used the [Telco Customer Churn][dataset] dataset to train the model.
 
 ## Requirements
 
-- [Pipenv](https://pipenv.pypa.io/en/latest/) to install the Python project;
-- [FastAPI](https://fastapi.tiangolo.com/) and [Uvicorn](https://www.uvicorn.org/) for the API server;
-- [Pandas](https://pandas.pydata.org/) (to optionally train the model), [Scikit-Learn](https://scikit-learn.org/stable/) and [Numpy](https://numpy.org/);
-- [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) to interact with AWS services (optional);
-- [Docker](https://www.docker.com/) to run the containerized project (optional).
+- [Pipenv][pipenv] to install the Python project;
+- [FastAPI][fastapi] and [Uvicorn][uvicorn] for the API server;
+- [Pandas][pandas] (to optionally train the model), [Scikit-Learn][sklearn] and [Numpy][numpy];
+- [Boto3][boto3] to interact with AWS services (optional);
+- [Docker][docker] to run the containerized project (optional).
 
 ## Installing the dependecies
 
-I used [Pipenv](https://pipenv.pypa.io/en/latest/) to manage this project dependencies. There are 3 ways to install this project:
+I used [Pipenv][pipenv] to manage this project dependencies. There are 3 ways to install this project:
 
 - `pipenv install` - install only dependencies required to run the standalone server;
 - `pipenv install --dev` or `pipenv install -d` - install development packages (i.e: linter and fommater) that I used during developoment (they work great with VSCode);
@@ -47,7 +47,7 @@ AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>           (necessary only if you haven't s
 AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>   (necessary only if you haven't set your AWS credentials file)
 ```
 
-If you want to know more about how to setup your AWS credentials file, check [this link](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
+If you want to know more about how to setup your AWS credentials file, check [this link][aws_credentials].
 
 Now, to run the server, you have 2 options:
 
@@ -57,21 +57,34 @@ This option easily gives freedom to customize and test the code, and to get most
 
 After installing the project, you must get the model `.joblib` file. For this, you also have two options:
 
-- download the training [dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) into the _data_ folder (in the root directory), and run `python model_training.py`. This will create the model `.joblib` file inside the _model_ (also in root directory). You can also supply the `--buket-name` argument, passing the name of a existing S3 bucket name in which the model will be saved. This also enables our second option.
+- download the training [dataset][dataset] into the _data_ folder (in the root directory), and run `python model_training.py`. This will create the model `.joblib` file inside the _model_ (also in root directory). You can also supply the `--buket-name` argument, passing the name of a existing S3 bucket name in which the model will be saved. This also enables our second option.
 - If you already have a model file saved in a S3 bucket and the [environment variables](#setting-environment-variables) set accordingly, then you are good to go.
 
-Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run `uvicorn churn_api:app  --port 8000` and the server will start. You can also supply the `--reload` argument, so the [FastAPI](https://fastapi.tiangolo.com/) framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
+Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run `uvicorn churn_api:app --port 8000` and the server will start. You can also supply the `--reload` argument, so the [FastAPI][fastapi] framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
 
 ### Run via Docker
 
 This is a good **deployment** option, as the dependencies installation and resource management is managed by Docker. You can also develop / customize the project in this mode, but this is not as straighforward.
 
-First you need to build the image with the command `docker build -t churnprediction-api:latest .`. After that run `docker run -it -p 8000:<HOST_PORT> -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> churnprediction-api:latest`, where `HOST_PORT` is the port in your host machine that you want to access the API through, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are[your AWS ID and secret](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). Note that for this execution option to work, you must to have a S3 bucket with a pre-trained model `.joblib` in it.
+First you need to build the image with the command `docker build -t churnprediction-api:latest .`. After that run `docker run -it -p 8000:<HOST_PORT> -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> churnprediction-api:latest`, where `HOST_PORT` is the port in your host machine that you want to access the API through, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are[your AWS ID and secret][aws_credentials]. Note that for this execution option to work, you must to have a S3 bucket with a pre-trained model `.joblib` in it.
 
 ## API documentation
 
-One of the most interesting features of [FastAPI](https://fastapi.tiangolo.com/) is that it automatically builds an [OpenAPI Specification](https://swagger.io/specification/) for your API without any additional action.
+One of the most interesting features of [FastAPI][fastapi] is that it automatically builds an [OpenAPI Specification][openapi] for your API without any additional action.
 
 With the API server running in your machine, in you browser, open the link `http://localhost:8000/docs`, and see the beatiful API documentation created by the framework.
 
-![Churn Prediction API documentation](https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png)
+![Churn Prediction API documentation][def]
+
+[def]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
+[fastapi]: https://fastapi.tiangolo.com/
+[pipenv]: https://pipenv.pypa.io/en/latest/
+[uvicorn]: https://www.uvicorn.org/
+[pandas]: https://pandas.pydata.org/
+[sklearn]: https://scikit-learn.org/stable/
+[numpy]: https://numpy.org/
+[boto3]: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+[docker]: https://www.docker.com/
+[dataset]: https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+[aws_credentials]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+[openapi]: https://swagger.io/specification/
