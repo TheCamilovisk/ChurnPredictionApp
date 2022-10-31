@@ -8,6 +8,7 @@
    - [Install directly in the host machine](#install-directly-in-the-host-machine)
    - [Run via Docker](#run-via-docker)
 5. [Solution Architeture](#solution-architecture)
+6. [Machine Learning model overview](#machine-learning-model-overview)
 
 ## Description
 
@@ -85,11 +86,24 @@ The API makes use of a [Scikit-Learn][sklearn] model, that is loaded from a `.jo
 
 The API is served, by default, through port `8000`. So, when [running the server using docker](#run-via-docker), rembemer redirect the right port.
 
-Where is the general overview of the solution achiteture.
+Here is the general overview of the solution achiteture.
 
 ![Churn Prediction API Architeture][churn-prediction-api-architeture]
 
+## Machine Learning model overview
 
+The model itself used to make the API inferences is a simple Scikit-Learn [Logistic Regression][sklearn-logreg]. The inputs are pre-processed with the following approach:
+
+- **Numerical features** are processed using the [MinMaxScaler][sklearn-minmax] transformer;
+- **Categorical features** are processed using the [OneHotEncoder][sklearn-ohe] transformer.
+
+Everything was conveniently put together using a Scikit-Learn's [Pipeline][sklearn-pipeline] object, enabling the easy model training and inference.
+
+This model architeture is based on one of my Kaggle kernels, which can be found [here][kaggle-kernel]. A version of this kernel is also part of [Data Science Notebooks folder][dsnotebooks], and can be also found [here][churnprediction-notebook].
+
+Here is the overview of the model pipeline used in the API.
+
+![Churn Prediction Model][churnprediction-model]
 
 [churn-prediction-api-docs]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
 [churn-prediction-api-architeture]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/churn-prediction-api-arch.png
@@ -106,3 +120,11 @@ Where is the general overview of the solution achiteture.
 [openapi]: https://swagger.io/specification/
 [flask]: https://flask.palletsprojects.com/en/2.2.x/
 [fastapi-performance]: https://fastapi.tiangolo.com/#performance
+[sklearn-logreg]: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+[sklearn-minmax]: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
+[sklearn-ohe]: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+[sklearn-pipeline]: https://scikit-learn.org/stable/modules/compose.html
+[kaggle-kernel]: https://www.kaggle.com/code/thecamilovisk/simple-end-to-end-project
+[dsnotebooks]: https://github.com/TheCamilovisk/DSNotebooks
+[churnprediction-notebook]: https://github.com/TheCamilovisk/DSNotebooks/tree/main/ChurnPrediction
+[churnprediction-model]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/churn-prediction-model.png
