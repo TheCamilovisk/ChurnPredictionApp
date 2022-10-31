@@ -7,6 +7,7 @@
    - [Setting environment variables](#setting-environment-variables)
    - [Install directly in the host machine](#install-directly-in-the-host-machine)
    - [Run via Docker](#run-via-docker)
+5. [Solution Architeture](#solution-architecture)
 
 ## Description
 
@@ -87,6 +88,8 @@ The API is served, by default, through port `8000`. So, when [running the server
 Where is the general overview of the solution achiteture.
 
 ![Churn Prediction API Architeture][churn-prediction-api-architeture]
+
+
 
 [churn-prediction-api-docs]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
 [churn-prediction-api-architeture]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/churn-prediction-api-arch.png
