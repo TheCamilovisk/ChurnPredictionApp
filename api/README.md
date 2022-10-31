@@ -89,7 +89,7 @@ Where is the general overview of the solution achiteture.
 ![Churn Prediction API Architeture][churn-prediction-api-architeture]
 
 [churn-prediction-api-docs]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
-[churn-prediction-api-architeture]: ../imgs/churn-prediction-api-arch.drawio.png
+[churn-prediction-api-architeture]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/churn-prediction-api-arch.png
 [fastapi]: https://fastapi.tiangolo.com/
 [pipenv]: https://pipenv.pypa.io/en/latest/
 [uvicorn]: https://www.uvicorn.org/
