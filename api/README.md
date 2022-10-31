@@ -74,9 +74,22 @@ One of the most interesting features of [FastAPI][fastapi] is that it automatica
 
 With the API server running in your machine, in you browser, open the link `http://localhost:8000/docs`, and see the beatiful API documentation created by the framework.
 
-![Churn Prediction API documentation][def]
+![Churn Prediction API documentation][churn-prediction-api-docs]
 
-[def]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
+## Solution Architecture
+
+As mentioned before, the API was built using the [FastAPI][fastapi] framework. I chose this option instead of others (like [Flask][flask]) due to it's simple and robust approach, [high performance][fastapi-performance] (due to the use of asynchronous programming), great community and growing attention from industry.
+
+The API makes use of a [Scikit-Learn][sklearn] model, that is loaded from a `.joblib` file, which can be obtained by either training the model from scratch or by downloading a pre-trained model from a specific S3 bucket.
+
+The API is served, by default, through port `8000`. So, when [running the server using docker](#run-via-docker), rembemer redirect the right port.
+
+Where is the general overview of the solution achiteture.
+
+![Churn Prediction API Architeture][churn-prediction-api-architeture]
+
+[churn-prediction-api-docs]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
+[churn-prediction-api-architeture]: ../imgs/churn-prediction-api-arch.drawio.png
 [fastapi]: https://fastapi.tiangolo.com/
 [pipenv]: https://pipenv.pypa.io/en/latest/
 [uvicorn]: https://www.uvicorn.org/
@@ -88,3 +101,5 @@ With the API server running in your machine, in you browser, open the link `http
 [dataset]: https://www.kaggle.com/datasets/blastchar/telco-customer-churn
 [aws_credentials]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 [openapi]: https://swagger.io/specification/
+[flask]: https://flask.palletsprojects.com/en/2.2.x/
+[fastapi-performance]: https://fastapi.tiangolo.com/#performance
