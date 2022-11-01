@@ -99,11 +99,13 @@ The model itself used to make the API inferences is a simple Scikit-Learn [Logis
 
 Everything was conveniently put together using a Scikit-Learn's [Pipeline][sklearn-pipeline] object, enabling the easy model training and inference.
 
-This model architeture is based on one of my Kaggle kernels, which can be found [here][kaggle-kernel]. A version of this kernel is also part of [Data Science Notebooks folder][dsnotebooks], and can be also found [here][churnprediction-notebook].
+This model architeture is based on one of my Kaggle kernels, which can be found [here][kaggle-kernel]. A version of this kernel is also part of my [Data Science Notebooks repository][dsnotebooks], and can be also found [here][churnprediction-notebook].
 
 Here is the overview of the model pipeline used in the API.
 
 ![Churn Prediction Model][churnprediction-model]
+
+<!-- Link Definitions -->
 
 [churn-prediction-api-docs]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/openapi-page.png
 [churn-prediction-api-architeture]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/churn-prediction-api-arch.png
