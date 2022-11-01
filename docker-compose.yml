@@ -2,14 +2,24 @@ version: "3.7"
 
 services:
   api:
-    image: churnprediction-api:latest
+    image: churnprediction-api
+    build: ./api
     container_name: churn-api
     network_mode: host
-    env_file:
-      - api/.env
+    # Uncomment the lines 12-13 if you have a .joblib model ins a S3 bucket and a .env file inside the api folder,
+    # with the required environment variables, as described in:
+    # https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#setting-environment-variables
+    # env_file:
+    #   - ./api/.env
+    # Uncomment the lines 17-18 if you already have a .joblib model file in the right place and want to use it.
+    # To generate the .joblib file, follow the instructions in:
+    # https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
+    # volumes:
+    #   - ./api/models:/app/models
   
   webserver:
     image: webserver
+    build: .
     container_name: churn-webserver
     depends_on:
       - api
