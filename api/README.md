@@ -1,5 +1,7 @@
 # ChurnPredictionAPP Rest API
 
+## Table of contents
+
 1. [Description](#description)
 2. [Requirements](#requirements)
 3. [Installing the dependencies](#installing-the-dependecies)
@@ -9,6 +11,8 @@
    - [Run via Docker](#run-via-docker)
 5. [Solution Architeture](#solution-architecture)
 6. [Machine Learning model overview](#machine-learning-model-overview)
+7. [Creating the model file](#creating-the-model-file)
+   - [Running without using AWS](#running-without-using-aws)
 
 ## Description
 
@@ -59,7 +63,7 @@ This option easily gives freedom to customize and test the code, and to get most
 
 After installing the project, you must get the model `.joblib` file. For this, you also have two options:
 
-- download the training [dataset][dataset] into the _data_ folder (in the root directory), and run `python model_training.py`. This will create the model `.joblib` file inside the _model_ (also in root directory). You can also supply the `--buket-name` argument, passing the name of a existing S3 bucket name in which the model will be saved. This also enables our second option.
+- Follow the instructions on [how to train the model from scratch](#creating-the-model-file). This also enables our second option.
 - If you already have a model file saved in a S3 bucket and the [environment variables](#setting-environment-variables) set accordingly, then you are good to go.
 
 Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run `uvicorn churn_api:app --port 8000` and the server will start. You can also supply the `--reload` argument, so the [FastAPI][fastapi] framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
@@ -104,6 +108,26 @@ This model architeture is based on one of my Kaggle kernels, which can be found 
 Here is the overview of the model pipeline used in the API.
 
 ![Churn Prediction Model][churnprediction-model]
+
+## Creating the model file
+
+To create the `.joblib` model file you must follow the [1rst server execution option](#installing-the-dependecies) and have the project's virtual environment installed on your machine. Next, download the training [dataset][dataset] into the _data_ folder (in the root directory), and execute the following command:
+```
+pipenv shell               # to activate the virtual environment
+python model_training.py
+```
+
+This will create the model `.joblib` file inside the _model_ (also in root directory). You can also supply the `--bucket-name` argument, passing the name of a existing S3 bucket name in which the model will be saved.
+
+### Running without using AWS
+
+With the model file in the right place, you don't need any AWS connection at all, and can opt to not set the [environment variables](#setting-environment-variables). This is also true when using the Docker image, as long as you set a volume pointing to the _models_ folder to the right place in the container. For example, you can run the following command:
+
+```
+docker run -it -p 8000:8000 -v <MODELS_FOLDER_LOCATION>:/app/models churnprediction-api:latest
+```
+
+this will make the application used the existing `.joblib` file instead of download a new one everytime it starts. This is greate if you're customizing this project and want to just test the Docker image.
 
 <!-- Link Definitions -->
 
