@@ -66,13 +66,25 @@ After installing the project, you must get the model `.joblib` file. For this, y
 - Follow the instructions on [how to train the model from scratch](#creating-the-model-file). This also enables our second option.
 - If you already have a model file saved in a S3 bucket and the [environment variables](#setting-environment-variables) set accordingly, then you are good to go.
 
-Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run `uvicorn churn_api:app --port 8000` and the server will start. You can also supply the `--reload` argument, so the [FastAPI][fastapi] framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
+Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run:
+```
+pipenv shell                       # to activate the environment
+uvicorn churn_api:app --port 8000
+```
+and the server will start. You can also supply the `--reload` argument, so the [FastAPI][fastapi] framework will watch your api project files for any modifications and automatically restart your server if an update is needed.
 
 ### Run via Docker
 
 This is a good **deployment** option, as the dependencies installation and resource management is managed by Docker. You can also develop / customize the project in this mode, but this is not as straighforward.
 
-First you need to build the image with the command `docker build -t churnprediction-api:latest .`. After that run `docker run -it -p 8000:<HOST_PORT> -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> churnprediction-api:latest`, where `HOST_PORT` is the port in your host machine that you want to access the API through, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are[your AWS ID and secret][aws_credentials]. Note that for this execution option to work, you must to have a S3 bucket with a pre-trained model `.joblib` in it.
+First you need to build the image with the command `docker build -t churnprediction-api:latest .`. After that run:
+```
+docker run -it -p 8000:<HOST_PORT> \
+-e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
+-e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
+churnprediction-api:latest
+```
+Where `HOST_PORT` is the port in your host machine that you want to access the API through, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are[your AWS ID and secret][aws_credentials]. Note that for this execution option to work, you must to have a S3 bucket with a pre-trained model `.joblib` in it.
 
 ## API documentation
 
@@ -124,7 +136,9 @@ This will create the model `.joblib` file inside the _model_ (also in root direc
 With the model file in the right place, you don't need any AWS connection at all, and can opt to not set the [environment variables](#setting-environment-variables). This is also true when using the Docker image, as long as you set a volume pointing to the _models_ folder to the right place in the container. For example, you can run the following command:
 
 ```
-docker run -it -p 8000:8000 -v <MODELS_FOLDER_LOCATION>:/app/models churnprediction-api:latest
+docker run -it -p 8000:8000 \
+-v <MODELS_FOLDER_LOCATION>:/app/models \
+churnprediction-api:latest
 ```
 
 this will make the application used the existing `.joblib` file instead of download a new one everytime it starts. This is greate if you're customizing this project and want to just test the Docker image.
