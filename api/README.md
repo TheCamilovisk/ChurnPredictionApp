@@ -63,7 +63,7 @@ This option easily gives freedom to customize and test the code, and to get most
 
 After installing the project, you must get the model `.joblib` file. For this, you also have two options:
 
-- Follow the instructions on [how to train the model from scratch](#creating-the-model-file). This also enables our second option.
+- Follow the instructions on [how to train the model from scratch](#creating-the-model-file), which will enable to run the server without the need of an S3 bucket or AWS credentials. This also enables our second option.
 - If you already have a model file saved in a S3 bucket and the [environment variables](#setting-environment-variables) set accordingly, then you are good to go.
 
 Whichever way you've chosen, with the `.joblib` file at it's right place and with your `Pipenv` environment activated, you just need to run:
