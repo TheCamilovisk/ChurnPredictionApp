@@ -53,6 +53,8 @@ After that, uncomment the following lines in the [docker-compose file][docker-co
 #   - ./api/.env
 ```
 
+**Note:** The `.env` file that is used by default is just and example. This file can be in any location, just be sure to supply the right path to `env_file` parameter.
+
 ### Run the app
 
 After making the required modification according with your choice, in the root folder of the project, run:
