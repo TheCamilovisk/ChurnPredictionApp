@@ -7,6 +7,8 @@
     - [Use the local model file](#use-the-local-model-file)
     - [Use model file in S3 bucket](#use-model-file-in-s3-bucket)
     - [Run the app](#run-the-app)
+3. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
+4. [Create an IAM role](#create-an-iam-role)
 
 ## Introduction
 
@@ -72,6 +74,44 @@ Then you can conclude that:
 1. I'm big fan of dark themes 😜️
 2. I'm a really bad web designer 😔️
 
+## Deploy the app to an EC2 instance
+
+Let's make the app available to the external world, by deploying it to an [AWS EC2][ec2-site] instance. For this, you'll need to have an AWS account. If you don't have one yet, just follow [these guidelines][aws-create-account], and you'll be good to go.
+
+**Note 1:** Our configuration will be very simple, and, in theory, you won't need to off the [Free Tier][free-tier] limits (I've tested it myself). **BUT** I garantee nothing, specially if you've used a lot of you quota already. Then, be careful about your limits to not be charged. You've been warned, OK 👍️?
+
+**Note 2:** I strongly suggest you to make some basic **security configuration** to protect your account and enable a billing alarm. Just follow [this video][secure-aws-account] and you're good to go.
+
+### Create an IAM role
+
+After log in in the [AWS Management Console][aws-console], search for the *IAM* service in the search bar.
+
+![Search bar][aws-searchbar]
+
+![Access IAM menu][access-iam]
+
+From there, we'll crate a new role.
+
+![IAM menu][iam-menu]
+
+![Create role][create-role-buttom]
+
+Choose **AWS service** in **Trusted entity type** and **EC2** in **Use case**. Click **Next**.
+
+![Trusted entity type][trusted-entity-type]
+
+Add the **AmazonS3ReadOnlyAccess** and the **AWSAppRunnerServicePolicyForECRAccess** permissions. Click Next
+
+![S3 read only access][s3-readonly-acess]
+
+![ECR access][ecr-access]
+
+Name the role and, optionally, give a description and tags to it. Review everything and click in **Create role** at the end of the page.
+
+![Review role][role-review]
+
+![Create role buttom][final-create-role]
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
@@ -79,3 +119,17 @@ Then you can conclude that:
 [create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
 [docker-compose-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/blob/main/docker-compose.yml
 [app-screen]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/app-screen.png
+[ec2-site]: https://aws.amazon.com/ec2/
+[aws-create-account]: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
+[free-tier]: https://aws.amazon.com/free
+[secure-aws-account]: https://www.youtube.com/watch?v=FRQ9fE4fd5g
+[aws-console]: https://aws.amazon.com/console/
+[aws-searchbar]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/searchbar-iam.png
+[access-iam]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/searchbar-iam.png
+[iam-menu]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/roles-menu.png
+[create-role-buttom]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/create-role-buttom.png
+[trusted-entity-type]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/trusted-entity-type.png
+[s3-readonly-acess]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/s3-readonly-access.png
+[ecr-access]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/ecr-access.png
+[role-review]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/role-review.png
+[final-create-role]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/final-create-role.png
