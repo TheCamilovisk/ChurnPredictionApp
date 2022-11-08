@@ -124,7 +124,7 @@ Name the role and, optionally, give a description and tags to it. Review everyth
 [free-tier]: https://aws.amazon.com/free
 [secure-aws-account]: https://www.youtube.com/watch?v=FRQ9fE4fd5g
 [aws-console]: https://aws.amazon.com/console/
-[aws-searchbar]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/searchbar-iam.png
+[aws-searchbar]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/aws-searchbar.png
 [access-iam]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/searchbar-iam.png
 [iam-menu]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/roles-menu.png
 [create-role-buttom]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/create-role-buttom.png
