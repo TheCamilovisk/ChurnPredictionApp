@@ -142,9 +142,7 @@ The Amazon [ECR][aws-ecr] is a fully managed container registry offering  high-p
 
 First of all, we must login into ECR service. Open your terminal and execute this command, replacing **aws_account_id** and **region** with your AWS account ID and the AWS region you want the app to live, respectively.
 
-<pre>
-aws ecr get-login-password  --region <b style="color: red">region</b> | docker login --username AWS --password-stdin <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com
-</pre>
+<pre><code>aws ecr get-login-password  --region <b style="color: red">region</b> | docker login --username AWS --password-stdin <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com</code></pre>
 
 After that, create the repository your docker image will live in. You can either create it in the [ECR dashboard][ecr-dashboard] or directly in AWS console. Be careful to select the region you've choose.
 
@@ -161,15 +159,11 @@ docker build -t churn_prediction_api:latest .
 
 Tag the image, so you can push the image to the ECR repository
 
-<pre>
-docker tag churn_prediction_api:latest <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api
-</pre>
+<pre><code>docker tag churn_prediction_api:latest <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api</code></pre>
 
 Finally, push the docker image to the repository:
 
-<pre>
-docker push <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api
-</pre>
+<pre><code>docker push <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api</code></pre>
 
 <!-- Link Definitions -->
 
