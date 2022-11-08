@@ -9,6 +9,7 @@
     - [Run the app](#run-the-app)
 3. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
     - [Create an IAM role](#create-an-iam-role)
+    - [Create a security group](#create-a-security-group)
 
 ## Introduction
 
@@ -112,6 +113,27 @@ Name the role and, optionally, give a description and tags to it. Review everyth
 
 ![Create role buttom][final-create-role]
 
+### Create a security group
+
+Now let's create a secure group to define how to handle connections to your EC2 instance.
+
+Search for **EC2** service in AWS Management Console search bar.
+
+![Find the EC2 service][searchbar-ec2]
+
+In EC2 menu, find the **Security Groups** in the right side-bar, under **Network & Security**. There, click in **Create security group**.
+
+![Security Groups Menu][security-groups-menu]
+
+Name your security group and define **3 inbound rules** as follows (click in the **Add rule** buttom):
+- One of type **SSH**, with **your IP** as source. This will enable ssh connections from your IP only (just to be safe).
+- One of type **HTTP**, with **anywhere** as source. This will enable to access the app from anywhere using **http protocol**.
+- One of type **HTTPS**, with **anywhere** as source. This will enable to access the app from anywhere using **https protocol**.
+
+![Create a security group][security-group-definiton]
+
+Click in **Create security group** buttom at the end of the page to finish the group creation.
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
@@ -133,3 +155,6 @@ Name the role and, optionally, give a description and tags to it. Review everyth
 [ecr-access]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/ecr-access.png
 [role-review]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/role-review.png
 [final-create-role]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/final-create-role.png
+[searchbar-ec2]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/searchbar-ec2.png
+[security-groups-menu]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/security-groups-menu.png
+[security-group-definiton]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/security-group-definition.png
