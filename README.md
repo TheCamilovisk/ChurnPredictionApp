@@ -10,6 +10,7 @@
 3. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
     - [Create an IAM role](#create-an-iam-role)
     - [Create a security group](#create-a-security-group)
+    - [Create an ECR image](#create-and-ecr-image)
 
 ## Introduction
 
@@ -134,7 +135,7 @@ Name your security group and define **3 inbound rules** (click in the **Add rule
 
 Click in **Create security group** buttom at the end of the page to finish the group creation.
 
-### Create and ECR image
+### Create an ECR image
 
 The Amazon [ECR][aws-ecr] is a fully managed container registry offering  high-performance hosting, so users can realibly deploy application images and artifacts anywhere. We'll use it to easily deploy our [Churn Prediction API][churnprediction-api] into EC2 instances.
 
