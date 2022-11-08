@@ -8,7 +8,7 @@
     - [Use model file in S3 bucket](#use-model-file-in-s3-bucket)
     - [Run the app](#run-the-app)
 3. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
-4. [Create an IAM role](#create-an-iam-role)
+    - [Create an IAM role](#create-an-iam-role)
 
 ## Introduction
 
