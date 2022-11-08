@@ -125,7 +125,7 @@ In EC2 menu, find the **Security Groups** in the right side-bar, under **Network
 
 ![Security Groups Menu][security-groups-menu]
 
-Name your security group and define **3 inbound rules** as follows (click in the **Add rule** buttom):
+Name your security group and define **3 inbound rules** (click in the **Add rule** buttom) as follows :
 - One of type **SSH**, with **your IP** as source. This will enable ssh connections from your IP only (just to be safe).
 - One of type **HTTP**, with **anywhere** as source. This will enable to access the app from anywhere using **http protocol**.
 - One of type **HTTPS**, with **anywhere** as source. This will enable to access the app from anywhere using **https protocol**.
