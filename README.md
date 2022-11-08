@@ -134,6 +134,43 @@ Name your security group and define **3 inbound rules** (click in the **Add rule
 
 Click in **Create security group** buttom at the end of the page to finish the group creation.
 
+### Create and ECR image
+
+The Amazon [ECR][aws-ecr] is a fully managed container registry offering  high-performance hosting, so users can realibly deploy application images and artifacts anywhere. We'll use it to easily deploy our [Churn Prediction API][churnprediction-api] into EC2 instances.
+
+**Note:** This step requires the AWS CLI tool [installed][aws-cli-install] and [configured][aws-cli-setup] in your local machine.
+
+First of all, we must login into ECR service. Open your terminal and execute this command, replacing **aws_account_id** and **region** with your AWS account ID and the AWS region you want the app to live, respectively.
+
+<pre>
+aws ecr get-login-password  --region <b style="color: red">region</b> | docker login --username AWS --password-stdin <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com
+</pre>
+
+After that, create the repository your docker image will live in. You can either create it in the [ECR dashboard][ecr-dashboard] or directly in AWS console. Be careful to select the region you've choose.
+
+```
+aws ecr create-repository --repository-name churn_prediction_api
+```
+
+Next, go to the [api][churnprediction-api] folder of this repository and build the docker image inside.
+
+```
+cd api
+docker build -t churn_prediction_api:latest .
+```
+
+Tag the image, so you can push the image to the ECR repository
+
+<pre>
+docker tag churn_prediction_api:latest <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api
+</pre>
+
+Finally, push the docker image to the repository:
+
+<pre>
+docker push <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api
+</pre>
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
@@ -158,3 +195,7 @@ Click in **Create security group** buttom at the end of the page to finish the g
 [searchbar-ec2]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/searchbar-ec2.png
 [security-groups-menu]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/security-groups-menu.png
 [security-group-definiton]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/security-group-definition.png
+[aws-ecr]: https://aws.amazon.com/ecr/
+[aws-cli-install]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+[aws-cli-setup]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
+[ecr-dashboard]: https://console.aws.amazon.com/ecr/repositories
