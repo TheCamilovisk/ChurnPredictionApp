@@ -1,5 +1,5 @@
-sudo cp ${HOME}/ChurnPredictionApp/config/nginx/default.conf /etc/nginx/conf.d/default.conf
-sudo cp ${HOME}/ChurnPredictionApp/html/* /usr/share/nginx/html
+sudo cp ../nginx/default.conf /etc/nginx/conf.d/default.conf
+sudo cp ../../html/* /usr/share/nginx/html
 
 sudo chmod -R g+x ${HOME}
 
