@@ -9,8 +9,9 @@
     - [Run the app](#run-the-app)
 3. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
     - [Create an IAM role](#create-an-iam-role)
-    - [Create a security group](#create-a-security-group)
     - [Create an ECR image](#create-and-ecr-image)
+    - [Create a security group](#create-a-security-group)
+    - [Create an EC2 instance](#create-an-ec2-instance)
 
 ## Introduction
 
@@ -114,27 +115,6 @@ Name the role and, optionally, give a description and tags to it. Review everyth
 
 ![Create role buttom][final-create-role]
 
-### Create a security group
-
-Now let's create a secure group to define how to handle connections to your EC2 instance.
-
-Search for **EC2** service in AWS Management Console search bar.
-
-![Find the EC2 service][searchbar-ec2]
-
-In EC2 menu, find the **Security Groups** in the right side-bar, under **Network & Security**. There, click in **Create security group**.
-
-![Security Groups Menu][security-groups-menu]
-
-Name your security group and define **3 inbound rules** (click in the **Add rule** buttom) as follows :
-- One of type **SSH**, with **your IP** as source. This will enable ssh connections from your IP only (just to be safe).
-- One of type **HTTP**, with **anywhere** as source. This will enable to access the app from anywhere using **http protocol**.
-- One of type **HTTPS**, with **anywhere** as source. This will enable to access the app from anywhere using **https protocol**.
-
-![Create a security group][security-group-definiton]
-
-Click in **Create security group** buttom at the end of the page to finish the group creation.
-
 ### Create an ECR image
 
 The Amazon [ECR][aws-ecr] is a fully managed container registry offering  high-performance hosting, so users can realibly deploy application images and artifacts anywhere. We'll use it to easily deploy our [Churn Prediction API][churnprediction-api] into EC2 instances.
@@ -166,6 +146,59 @@ Finally, push the docker image to the repository:
 
 <pre><code>docker push <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api</code></pre>
 
+### Create a security group
+
+Now let's create a secure group to define how to handle connections to your EC2 instance.
+
+Search for **EC2** service in AWS Management Console search bar.
+
+![Find the EC2 service][searchbar-ec2]
+
+In EC2 menu, find the **Security Groups** in the right side-bar, under **Network & Security**. There, click in **Create security group**.
+
+![Security Groups Menu][security-groups-menu]
+
+Name your security group and define **3 inbound rules** (click in the **Add rule** buttom) as follows :
+- One of type **SSH**, with **your IP** as source. This will enable ssh connections from your IP only (just to be safe).
+- One of type **HTTP**, with **anywhere** as source. This will enable to access the app from anywhere using **http protocol**.
+- One of type **HTTPS**, with **anywhere** as source. This will enable to access the app from anywhere using **https protocol**.
+
+![Create a security group][security-group-definiton]
+
+Click in **Create security group** buttom at the end of the page to finish the group creation.
+
+### Create an EC2 instance
+
+In the EC2 service dashboard, access the **Instances** menu in theleft sidebar. There, click in **Launch instances**.
+
+![Launch EC2 instance][launch-ec2-instance]
+
+In **Launch an instance** menu, name your instance and select select the **Amazon Linux 2 AMI** (free tier eligible).
+
+![EC2 naming and AMI selection][ec2-naming-ami]
+
+Make sure that that you **instance type** is **t2.micro** (free tier eligible) and, if you don't have one yet, create a new **key pair**, of type **RSA** and file format as **.perm** (if you're using OpenSSH and you local machine is Linux) or **.ppk** (if you're using PuTTY and your local machine is Windows). You'll use this key pair to access the EC2 instance from your local machine, so download it and keep it safe.
+
+**Note:** DON'T SHARE YOU KEY PAIR.
+
+![Select instance type and key pair][instance-type-keypair]
+
+![Create a key pair][create-key-pair]
+
+Under **Network settings** select your previously created **security group**.
+
+![Select the previously created security group][network-settings]
+
+Under **Advanced details**, in **IAM instance profile**, select the **role** that you've also previously created.
+
+![Select the previously created role and launch the instance][select-role-and-launch]
+
+Back to the **Instances** menu, wait for the **instance state** to become **Running** and all status checks have passed.
+
+![Check the instance status][instance-status]
+
+Now you can proceed to the next step.
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
@@ -194,3 +227,10 @@ Finally, push the docker image to the repository:
 [aws-cli-install]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 [aws-cli-setup]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
 [ecr-dashboard]: https://console.aws.amazon.com/ecr/repositories
+[launch-ec2-instance]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/launch-ec2-instance.png
+[ec2-naming-ami]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/ec2-naming-ami.png
+[instance-type-keypair]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/instance-type-keypair.png
+[create-key-pair]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/create-key-pair.png
+[network-settings]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/network-settings.png
+[select-role-and-launch]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/select-role-and-launch.png
+[instance-status]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/instance-status.png
