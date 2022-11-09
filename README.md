@@ -267,10 +267,8 @@ Now you need to define 2 enviroment variables.
 
 **Note 3:** I'm assuming that you've followed the instructions on [how to create the model .joblib file][how-to-create-model-file] and have it stored into a S3 bucket (also included in instructions).
 
-<pre>
-<code>export BUCKET_NAME=<b>YOUR_BUCKET_NAME</b></code>
-<code>export MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b></code>
-</pre>
+<pre><code>export BUCKET_NAME=<b>YOUR_BUCKET_NAME</b>
+export MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b></code></pre>
 
 Still inside folder **config/scripts**, run the **start** script.
 
