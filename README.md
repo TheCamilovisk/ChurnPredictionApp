@@ -12,6 +12,7 @@
     - [Create an ECR image](#create-and-ecr-image)
     - [Create a security group](#create-a-security-group)
     - [Create an EC2 instance](#create-an-ec2-instance)
+    - [Connect to the EC2 instance](#connect-to-the-ec2-instance)
 
 ## Introduction
 
@@ -199,6 +200,28 @@ Back to the **Instances** menu, wait for the **instance state** to become **Runn
 
 Now you can proceed to the next step.
 
+### Connect to the EC2 instance
+
+Now, your must stablish a connection between your local machine to the EC2 instance to complete app configuration.
+
+Select the new instance and click in **Connect**.
+
+![Connect to your EC2 instance][connect-to-instance]
+
+You'll be presented to multiple connection methods. Select **SSH client** and copy the example command.
+
+![Connect through SSH][instance-connection-methods]
+
+Executing the command example, replacing **KEY_PAIR**, **PUBLIC_IP** and **REGION** with your key pair location, EC2 public IP and the selected region, respectively.
+
+<pre><code>ssh -i <b>KEY_PAIR</b> ec2-user@ec2-<b>PUBLIC_IP</b>.<b>REGION</b>.compute.amazonaws.com</code></pre>
+
+If everything went right, your prompt will be connected to the instance
+
+![Prompt connect to the EC2 instance][connected-to-instance]
+
+The rest of the setup will be made directly to the instance.
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
@@ -234,3 +257,6 @@ Now you can proceed to the next step.
 [network-settings]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/network-settings.png
 [select-role-and-launch]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/select-role-and-launch.png
 [instance-status]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/instance-status.png
+[connect-to-instance]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/connect-to-instance.png
+[instance-connection-methods]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/instance-connection-methods.png
+[connected-to-instance]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/connected-to-instance.png
