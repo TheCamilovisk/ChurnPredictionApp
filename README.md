@@ -3,6 +3,7 @@
 ## Table of contents
 
 1. [Introduction](#introduction)
+2. [Live demo](#live-demo)
 2. [Run locally](#run-locally)
     - [Use the local model file](#use-the-local-model-file)
     - [Use model file in S3 bucket](#use-model-file-in-s3-bucket)
@@ -32,6 +33,10 @@ When deployed to an EC2 instance, it's meant to run behind a [Nginx][nginx] prox
 **Note 1:** This is the complete example solution, meant to be deployed to an AWS EC2 instance. If you want just the REST API backend implementation, it can be found in the [api folder][churnprediction-api] of this repository.
 
 **Note 2:** This project is meant to be for learning purposes, for both readers and myself. So, if you find any problem or are aware of better ways of doing some of the things that I do here, please let me know. And don't forget to be kind.
+
+## Live demo
+
+You can check the working deployed app by accessing [this link][live-preview].
 
 ## Run locally
 
@@ -282,7 +287,7 @@ Still inside folder **config/scripts**, run the **start** script.
 
 Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 DNS that you've retrieved early](#copy-files-to-the-ec2-instance) in your browser. If everything was done right, you will see the app page, now accessible for anyone 😃️.
 
-**Note:** I (kind of) tried to make the page responsive. So you may have a better experience in different devices 📱️
+**Note:** I (kind of) tried to make the page responsive. So you may have a better experience in different devices. 📱️
 
 ## Appendix
 
@@ -296,6 +301,7 @@ Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 D
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
 [nginx]: https://www.nginx.com/
+[live-preview]: http://ec2-18-228-46-88.sa-east-1.compute.amazonaws.com
 [create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
 [docker-compose-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/blob/main/docker-compose.yml
 [app-screen]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/app-screen.png
