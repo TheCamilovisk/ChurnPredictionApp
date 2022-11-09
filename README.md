@@ -14,6 +14,12 @@
     - [Create an EC2 instance](#create-an-ec2-instance)
     - [Copy files to the EC2 instance](#copy-files-to-the-ec2-instance)
     - [Connect to the EC2 instance](#connect-to-the-ec2-instance)
+    - [Finish instance setup and running the app](#finish-instance-setup-and-running-the-app)
+    - [Access the deployed app](#access-the-deployed-app)
+4. [Appendix](#appendix)
+    - [What env_dependencies.sh does?](#what-env_dependenciessh-does)
+    - [What setup_env.sh does?](#what-setup_envsh-does)
+    - [What start.sh does?](#what-startsh-does)
 
 ## Introduction
 
@@ -233,6 +239,59 @@ If everything went right, your prompt will be connected to the instance
 
 ![Prompt connect to the EC2 instance][connected-to-instance]
 
+### Finish instance setup and running the app
+
+Inside the instance, the first the uploaded package.
+
+```
+unzip package.zip
+```
+
+Folder **config** and **html** will be expanded to the current directory. Navigate to path **config/scripts**, and run the command:
+
+```
+. env_dependencies.sh
+```
+
+**Note 1:** See section [What env_dependencies.sh does?](#what-env_dependenciessh-does).
+
+Press `Ctrl + d` to logout from the instance and login again right after. Navigate again to **config/scripts**, and run:
+
+```
+. setup_env.sh
+```
+
+**Note 2:** See section [What setup_env.sh does?](#what-setup_envsh-does).
+
+Now you need to define 2 enviroment variables.
+
+**Note 3:** I'm assuming that you've followed the instructions on [how to create the model .joblib file][how-to-create-model-file] and have it stored into a S3 bucket (also included in instructions).
+
+<pre>
+<code>export BUCKET_NAME=<b>YOUR_BUCKET_NAME</b></code>
+<code>export MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b></code>
+</pre>
+
+Still inside folder **config/scripts**, run the **start** script.
+
+```
+. start.sh
+```
+
+**Note 4:** See section [What start.sh does?](#what-startsh-does).
+
+### Access the deployed app
+
+Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 DNS that you've retrieved early](#copy-files-to-the-ec2-instance) in your browser. If everything was done right, you will see the app page, now accessible for anyone 😃️.
+
+## Appendix
+
+### What env_dependencies.sh does?
+
+### What setup_env.sh does?
+
+### What start.sh does?
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
@@ -274,3 +333,4 @@ If everything went right, your prompt will be connected to the instance
 
 
 [connected-to-instance]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/connected-to-instance.png
+[how-to-create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
