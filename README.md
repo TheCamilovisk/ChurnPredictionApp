@@ -12,6 +12,7 @@
     - [Create an ECR image](#create-and-ecr-image)
     - [Create a security group](#create-a-security-group)
     - [Create an EC2 instance](#create-an-ec2-instance)
+    - [Copy files to the EC2 instance](#copy-files-to-the-ec2-instance)
     - [Connect to the EC2 instance](#connect-to-the-ec2-instance)
 
 ## Introduction
@@ -200,27 +201,37 @@ Back to the **Instances** menu, wait for the **instance state** to become **Runn
 
 Now you can proceed to the next step.
 
+### Copy files to the EC2 instance
+
+We'll send to the instance the html and configuration files required by our app to work.
+
+From the repository's root, zip the **html** and **config** folders with the command
+
+```
+zip -r package.zip html config
+```
+
+We'll need the **public IPv4 DNS** of the instance. Go to the **Instances** dashboard in the AWS management console and get it.
+
+![Retrieve the instance's IPV4 DNS][instance-ipv4-dns]
+
+Now send the zip file to the instance using the this command, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respetively.
+
+<pre><code>scp -i <b>[KEY_PAIR_LOCATION]</b> package.zip ec2-user@<b>[INSTANCE_IPV4_DNS]</b>:~/.</code></pre>
+
+The rest of the setup will be made directly to the instance.
+
 ### Connect to the EC2 instance
 
 Now, your must stablish a connection between your local machine to the EC2 instance to complete app configuration.
 
-Select the new instance and click in **Connect**.
+Executing the command example, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respetively, respectively.
 
-![Connect to your EC2 instance][connect-to-instance]
-
-You'll be presented to multiple connection methods. Select **SSH client** and copy the example command.
-
-![Connect through SSH][instance-connection-methods]
-
-Executing the command example, replacing **KEY_PAIR**, **PUBLIC_IP** and **REGION** with your key pair location, EC2 public IP and the selected region, respectively.
-
-<pre><code>ssh -i <b>KEY_PAIR</b> ec2-user@ec2-<b>PUBLIC_IP</b>.<b>REGION</b>.compute.amazonaws.com</code></pre>
+<pre><code>ssh -i <b>[KEY_PAIR_LOCATION]</b> ec2-user@<b>[INSTANCE_IPV4_DNS]</b></code></pre>
 
 If everything went right, your prompt will be connected to the instance
 
 ![Prompt connect to the EC2 instance][connected-to-instance]
-
-The rest of the setup will be made directly to the instance.
 
 <!-- Link Definitions -->
 
@@ -257,6 +268,9 @@ The rest of the setup will be made directly to the instance.
 [network-settings]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/network-settings.png
 [select-role-and-launch]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/select-role-and-launch.png
 [instance-status]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/instance-status.png
-[connect-to-instance]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/connect-to-instance.png
-[instance-connection-methods]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/instance-connection-methods.png
+
+
+[instance-ipv4-dns]: imgs/instance-ipv4-dns.png
+
+
 [connected-to-instance]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/connected-to-instance.png
