@@ -282,7 +282,7 @@ Still inside folder **config/scripts**, run the **start** script.
 
 Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 DNS that you've retrieved early](#copy-files-to-the-ec2-instance) in your browser. If everything was done right, you will see the app page, now accessible for anyone 😃️.
 
-**Note:** I (kind of) tried to make the page responsible. So you may have a better experience in different devices 📱️
+**Note:** I (kind of) tried to make the page responsive. So you may have a better experience in different devices 📱️
 
 ## Appendix
 
