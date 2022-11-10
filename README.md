@@ -360,18 +360,24 @@ This line pulls the REST API image from ECR.
 
 ### What start.sh does?
 
-This script is responsible for starting up the REST API endpoint. It's compose of just one line.
+This script is responsible for starting up the REST API endpoint.
 
 ```
-docker run -d -p 8000:8000 -e BUCKET_NAME=$BUCKET_NAME -e MODEL_ARTIFACT_PATH=$MODEL_ARTIFACT_PATH 877885770422.dkr.ecr.sa-east-1.amazonaws.com/churn_prediction_api:latest
+ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
 ```
+This line was already detailed in section about [setup_env.sh](#what-setup_envsh-does).
+
+```
+docker run -d -p 8000:8000 -e BUCKET_NAME=$BUCKET_NAME -e MODEL_ARTIFACT_PATH=$MODEL_ARTIFACT_PATH $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/churn_prediction_api:latest
+```
+This line runs the API image and exposes it through port 8000.
 
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
 [nginx]: https://www.nginx.com/
 [docker]: https://www.docker.com/
-[live-preview]: http://ec2-15-228-79-12.sa-east-1.compute.amazonaws.com
+[live-preview]: http://ec2-18-228-8-103.sa-east-1.compute.amazonaws.com
 [create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
 [docker-compose-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/blob/main/docker-compose.yml
 [app-screen]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/app-screen.png
