@@ -40,13 +40,13 @@ You can check the working deployed app by accessing [this link][live-preview].
 
 ## Run locally
 
-First of all, before you deploy this to solution into an EC2 instance, you can test it locally on you machine. For this, enter the api folder, and follow the instructions on how to [create the model file][create-model-file] used for inference. You can either choose to use the created model file or save it to an S3 bucket.
+First of all, before you deploy this solution to an EC2 instance, you can test it locally on you machine. For this, enter the api folder, and follow the instructions on how to [create the model file][create-model-file] used for inference. You can either choose to use the created model file or save it to an S3 bucket.
 
 With the `.joblib` model file create, open the [docker-compose file][docker-compose-file] in the root directory of this repository. Now, you have two options:
 
 ### Use the local model file
 
-The model training script will create the `.joblib` file in path `api/models/lr_model.joblib`. So, you just need to make the uncomment the follwoing lines.
+The model training script will create the `.joblib` file in path `api/models/lr_model.joblib`. So, you just need to uncomment the following lines.
 
 ```
 # volumes:
@@ -92,13 +92,13 @@ Then you can conclude that:
 
 Let's make the app available to the external world, by deploying it to an [AWS EC2][ec2-site] instance. For this, you'll need to have an AWS account. If you don't have one yet, just follow [these guidelines][aws-create-account], and you'll be good to go.
 
-**Note 1:** Our configuration will be very simple, and, in theory, you won't need to off the [Free Tier][free-tier] limits (I've tested it myself). **BUT** I garantee nothing, specially if you've used a lot of you quota already. Then, be careful about your limits to not be charged. You've been warned, OK 👍️?
+**Note 1:** Our configuration will be very simple, and, in theory, you won't need to step off the [Free Tier][free-tier] limits (I've tested it myself). **BUT** I garantee nothing, specially if you've used a lot of you quota already. Then, be careful about your limits to not be charged. You've been warned, OK 👍️?
 
 **Note 2:** I strongly suggest you to make some basic **security configuration** to protect your account and enable a billing alarm. Just follow [this video][secure-aws-account] and you're good to go.
 
 ### Create an IAM role
 
-After log in in the [AWS Management Console][aws-console], search for the *IAM* service in the search bar.
+After log in the [AWS Management Console][aws-console], search for the **IAM** service in the search bar.
 
 ![Search bar][aws-searchbar]
 
@@ -165,7 +165,7 @@ Search for **EC2** service in AWS Management Console search bar.
 
 ![Find the EC2 service][searchbar-ec2]
 
-In EC2 menu, find the **Security Groups** in the right side-bar, under **Network & Security**. There, click in **Create security group**.
+In EC2 menu, find the **Security Groups** in the right sidebar, under **Network & Security**. There, click in **Create security group**.
 
 ![Security Groups Menu][security-groups-menu]
 
@@ -180,11 +180,11 @@ Click in **Create security group** buttom at the end of the page to finish the g
 
 ### Create an EC2 instance
 
-In the EC2 service dashboard, access the **Instances** menu in theleft sidebar. There, click in **Launch instances**.
+In the EC2 service dashboard, access the **Instances** menu in the left sidebar. There, click in **Launch instances**.
 
 ![Launch EC2 instance][launch-ec2-instance]
 
-In **Launch an instance** menu, name your instance and select select the **Amazon Linux 2 AMI** (free tier eligible).
+In **Launch an instance** menu, name your instance and select the **Amazon Linux 2 AMI** (free tier eligible).
 
 ![EC2 naming and AMI selection][ec2-naming-ami]
 
@@ -224,7 +224,7 @@ We'll need the **public IPv4 DNS** of the instance. Go to the **Instances** dash
 
 ![Retrieve the instance's IPV4 DNS][instance-ipv4-dns]
 
-Now send the zip file to the instance using the this command, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respetively.
+Now send the zip file to the instance using the this command, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respectively.
 
 <pre><code>scp -i <b>KEY_PAIR_LOCATION</b> package.zip ec2-user@<b>INSTANCE_IPV4_DNS</b>:~/.</code></pre>
 
@@ -232,9 +232,9 @@ The rest of the setup will be made directly to the instance.
 
 ### Connect to the EC2 instance
 
-Now, your must stablish a connection between your local machine to the EC2 instance to complete app configuration.
+Now, your must stablish a connection between your local machine to the EC2 instance to complete the app configuration.
 
-Executing the command example, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respetively, respectively.
+Execute this command, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respectively.
 
 <pre><code>ssh -i <b>KEY_PAIR_LOCATION</b> ec2-user@<b>INSTANCE_IPV4_DNS</b></code></pre>
 
@@ -244,7 +244,7 @@ If everything went right, your prompt will be connected to the instance
 
 ### Finish instance setup and running the app
 
-Inside the instance, the first the uploaded package.
+Inside the instance, unzip the uploaded package.
 
 ```
 unzip package.zip
@@ -258,21 +258,23 @@ Folder **config** and **html** will be expanded to the current directory. Naviga
 
 **Note 1:** See section [What env_dependencies.sh does?](#what-env_dependenciessh-does).
 
-**Press `Ctrl + d` to logout from the instance and login again right after**. Navigate again to **config/scripts**, and run:
+**Press `Ctrl + d` to logout from the instance and login again right after**.
 
-```
-. setup_env.sh
-```
-
-**Note 2:** See section [What setup_env.sh does?](#what-setup_envsh-does).
-
-Now you need to define 4 enviroment variables.
+Now you need to define 3 enviroment variables.
 
 **Note 3:** I'm assuming that you've followed the instructions on [how to create the model .joblib file][how-to-create-model-file] and have it stored into a S3 bucket (also included in instructions).
 
 <pre><code>export BUCKET_NAME=<b>YOUR_BUCKET_NAME</b>
 export MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b>
 export REGION=<b>INSTANCE_REGION</b></code></pre>
+
+Navigate again to **config/scripts**, and run:
+
+```
+. setup_env.sh
+```
+
+**Note 2:** See section [What setup_env.sh does?](#what-setup_envsh-does).
 
 Still inside folder **config/scripts**, run the **start** script.
 
@@ -292,7 +294,7 @@ Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 D
 
 ### What env_dependencies.sh does?
 
-This script is responsible of installation [Docker][docker] and NGINX[nginx] to EC2 instance. It also adds the default user (ec2-user) to the docker group, so the user doesn't need *super user* previleges when running a docker command.
+This script is responsible for the installation [Docker][docker] and [Nginx][nginx] to EC2 instance. It also adds the default user (ec2-user) to the docker group, so the user doesn't need *super user* previleges when running a docker command.
 
 ```
 sudo amazon-linux-extras install -y docker
@@ -304,15 +306,15 @@ This line installs the **docker** package from the oficial Amazon repositories.
 sudo amazon-linux-extras install -y nginx1
 ```
 
-In the same way as the last command, this line install NGINX.
+In the same way as the last command, this line install Nginx.
 
 ```
 sudo gpasswd -a ${USER} docker
 ```
 
-This line adds the **current user** (supplied by the **USER** environment variable) the **docker** group.
+This line adds the **current user** (supplied by the **USER** environment variable) to the **docker** group.
 
-**Note:** User group modifications only take effect in the next login to the host system. This is why I instructed you to, after executing this script, logout and login right after during the [EC2 instance setup](#finish-instance-setup-and-running-the-app). So, don't skip this setp.
+**Note:** User group modifications only take effect in the next login to the host system. This is why I instructed you, after executing this script, to logout and login right after during the [EC2 instance setup](#finish-instance-setup-and-running-the-app). So, don't skip this step.
 
 ### What setup_env.sh does?
 
@@ -331,7 +333,7 @@ This line places the NGINX configuration file in it's right place. This file bas
 sudo cp ../../html/* /usr/share/nginx/html
 ```
 
-This line copies the **main.html**, **main.css** and **main.js** to the default NGINX server static files folder. This folder already has all required access permissions for NGINX.
+This line copies the **main.html**, **main.css** and **main.js** to the default NGINX server static files folder. This folder already has all required access permissions for Nginx.
 
 ```
 sudo service nginx restart
