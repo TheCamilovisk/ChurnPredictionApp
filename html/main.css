@@ -44,6 +44,11 @@ p {
   padding: 5px;
 }
 
+a {
+  color: coral;
+  text-decoration: none;
+}
+
 input,
 label,
 select {
