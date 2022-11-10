@@ -360,6 +360,12 @@ This line pulls the REST API image from ECR.
 
 ### What start.sh does?
 
+This script is responsible for starting up the REST API endpoint. It's compose of just one line.
+
+```
+docker run -d -p 8000:8000 -e BUCKET_NAME=$BUCKET_NAME -e MODEL_ARTIFACT_PATH=$MODEL_ARTIFACT_PATH 877885770422.dkr.ecr.sa-east-1.amazonaws.com/churn_prediction_api:latest
+```
+
 <!-- Link Definitions -->
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
