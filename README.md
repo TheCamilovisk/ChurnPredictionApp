@@ -258,7 +258,7 @@ Folder **config** and **html** will be expanded to the current directory. Naviga
 
 **Note 1:** See section [What env_dependencies.sh does?](#what-env_dependenciessh-does).
 
-Press `Ctrl + d` to logout from the instance and login again right after. Navigate again to **config/scripts**, and run:
+**Press `Ctrl + d` to logout from the instance and login again right after**. Navigate again to **config/scripts**, and run:
 
 ```
 . setup_env.sh
@@ -266,12 +266,13 @@ Press `Ctrl + d` to logout from the instance and login again right after. Naviga
 
 **Note 2:** See section [What setup_env.sh does?](#what-setup_envsh-does).
 
-Now you need to define 2 enviroment variables.
+Now you need to define 4 enviroment variables.
 
 **Note 3:** I'm assuming that you've followed the instructions on [how to create the model .joblib file][how-to-create-model-file] and have it stored into a S3 bucket (also included in instructions).
 
 <pre><code>export BUCKET_NAME=<b>YOUR_BUCKET_NAME</b>
-export MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b></code></pre>
+export MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b>
+export REGION=<b>INSTANCE_REGION</b></code></pre>
 
 Still inside folder **config/scripts**, run the **start** script.
 
@@ -291,7 +292,7 @@ Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 D
 
 ### What env_dependencies.sh does?
 
-This script is responsible to install [Docker][docker] and NGINX[nginx] to EC2 instance. It also adds the default user (ec2-user) to the docker group, so the user doesn't need *super user* previleges when running a docker command.
+This script is responsible of installation [Docker][docker] and NGINX[nginx] to EC2 instance. It also adds the default user (ec2-user) to the docker group, so the user doesn't need *super user* previleges when running a docker command.
 
 ```
 sudo amazon-linux-extras install -y docker
@@ -315,6 +316,48 @@ This line adds the **current user** (supplied by the **USER** environment variab
 
 ### What setup_env.sh does?
 
+This script is responsible of:
+- Place the static page and configuration files to their right places
+- Start the nginx and docker system services.
+- Pull the REST API docker image from ECR.
+
+```
+sudo cp ../nginx/default.conf /etc/nginx/conf.d/default.conf
+```
+
+This line places the NGINX configuration file in it's right place. This file basically tells where to find the **main.html** of the static site, and also serves as **reverse proxy** to our local API endpoint, redirecting the calls to address `http://localhost/api` to `http://localhost:8000/` (the default port configured as our API endpoint).
+
+```
+sudo cp ../../html/* /usr/share/nginx/html
+```
+
+This line copies the **main.html**, **main.css** and **main.js** to the default NGINX server static files folder. This folder already has all required access permissions for NGINX.
+
+```
+sudo service nginx restart
+sudo service docker restart
+```
+
+These lines restart the docker and nginx system services (and starts them, if they aren't running already).
+
+```
+ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+```
+
+This retrieves your AWS account ID.
+
+```
+aws ecr get-login-password  --region sa-east-1 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+```
+
+This line will login your docker service into ECR.
+
+```
+docker pull $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/churn_prediction_api:latest
+```
+
+This line pulls the REST API image from ECR.
+
 ### What start.sh does?
 
 <!-- Link Definitions -->
@@ -322,7 +365,7 @@ This line adds the **current user** (supplied by the **USER** environment variab
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
 [nginx]: https://www.nginx.com/
 [docker]: https://www.docker.com/
-[live-preview]: http://ec2-18-228-46-88.sa-east-1.compute.amazonaws.com
+[live-preview]: http://ec2-15-228-79-12.sa-east-1.compute.amazonaws.com
 [create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
 [docker-compose-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/blob/main/docker-compose.yml
 [app-screen]: https://raw.githubusercontent.com/TheCamilovisk/ChurnPredictionApp/main/imgs/app-screen.png
