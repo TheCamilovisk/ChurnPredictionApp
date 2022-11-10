@@ -57,12 +57,10 @@ The model training script will create the `.joblib` file in path `api/models/lr_
 
 If you opted to save the model in a S3 bucket and want to use it, you must create the `api/.env` file and place the following environment varibles
 
-```
-BUCKET_NAME=<YOUR_BUCKET_NAME>
-MODEL_ARTIFACT_PATH=<NAME_OF_YOUR_JOBLIB_FILE>
-AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
-AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
-```
+<pre><code>BUCKET_NAME=<b>YOUR_BUCKET_NAME</b>
+MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b>
+AWS_ACCESS_KEY_ID=<b>AWS_ACCESS_KEY_ID</b>
+AWS_SECRET_ACCESS_KEY=<b>AWS_SECRET_ACCESS_KEY</b></code></pre>
 
 After that, uncomment the following lines in the [docker-compose file][docker-compose-file]:
 
@@ -134,9 +132,9 @@ The Amazon [ECR][aws-ecr] is a fully managed container registry offering  high-p
 
 **Note:** This step requires the AWS CLI tool [installed][aws-cli-install] and [configured][aws-cli-setup] in your local machine.
 
-First of all, we must login into ECR service. Open your terminal and execute this command, replacing **aws_account_id** and **region** with your AWS account ID and the AWS region you want the app to live, respectively.
+First of all, we must login into ECR service. Open your terminal and execute this command, replacing **AWS_ACCOUNT_ID** and **REGION** with your AWS account ID and the AWS region you want the app to live, respectively.
 
-<pre><code>aws ecr get-login-password  --region <b style="color: red">region</b> | docker login --username AWS --password-stdin <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com</code></pre>
+<pre><code>aws ecr get-login-password  --region <b>REGION</b> | docker login --username AWS --password-stdin <b>AWS_ACCOUNT_ID</b>.dkr.ecr.<b>REGION</b>.amazonaws.com</code></pre>
 
 After that, create the repository your docker image will live in. You can either create it in the [ECR dashboard][ecr-dashboard] or directly in AWS console. Be careful to select the region you've choose.
 
@@ -153,11 +151,11 @@ docker build -t churn_prediction_api:latest .
 
 Tag the image, so you can push the image to the ECR repository
 
-<pre><code>docker tag churn_prediction_api:latest <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api</code></pre>
+<pre><code>docker tag churn_prediction_api:latest <b>AWS_ACCOUNT_ID</b>.dkr.ecr.<b>REGION</b>.amazonaws.com/churn_prediction_api</code></pre>
 
 Finally, push the docker image to the repository:
 
-<pre><code>docker push <b style="color: red">aws_account_id</b>.dkr.ecr.<b style="color: red">region</b>.amazonaws.com/churn_prediction_api</code></pre>
+<pre><code>docker push <b>AWS_ACCOUNT_ID</b>.dkr.ecr.<b>REGION</b>.amazonaws.com/churn_prediction_api</code></pre>
 
 ### Create a security group
 
@@ -228,7 +226,7 @@ We'll need the **public IPv4 DNS** of the instance. Go to the **Instances** dash
 
 Now send the zip file to the instance using the this command, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respetively.
 
-<pre><code>scp -i <b>[KEY_PAIR_LOCATION]</b> package.zip ec2-user@<b>[INSTANCE_IPV4_DNS]</b>:~/.</code></pre>
+<pre><code>scp -i <b>KEY_PAIR_LOCATION</b> package.zip ec2-user@<b>INSTANCE_IPV4_DNS</b>:~/.</code></pre>
 
 The rest of the setup will be made directly to the instance.
 
@@ -238,7 +236,7 @@ Now, your must stablish a connection between your local machine to the EC2 insta
 
 Executing the command example, replacing **KEY_PAIR_LOCATION** and **INSTANCE_IPV4_DNS** with your key pair and the instance IPv4 DNS, respetively, respectively.
 
-<pre><code>ssh -i <b>[KEY_PAIR_LOCATION]</b> ec2-user@<b>[INSTANCE_IPV4_DNS]</b></code></pre>
+<pre><code>ssh -i <b>KEY_PAIR_LOCATION</b> ec2-user@<b>INSTANCE_IPV4_DNS</b></code></pre>
 
 If everything went right, your prompt will be connected to the instance
 
