@@ -5,12 +5,13 @@ This project is a simple approach to create a deployment process of a simple but
 ## Table of contents
 
 1. [Introduction](#introduction)
-2. [Live demo](#live-demo)
-2. [Run locally](#run-locally)
+2. [Original kaggle kernel](#original-kaggle-kernel)
+3. [Live demo](#live-demo)
+4. [Run locally](#run-locally)
     - [Use the local model file](#use-the-local-model-file)
     - [Use model file in S3 bucket](#use-model-file-in-s3-bucket)
     - [Run the app](#run-the-app)
-3. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
+5. [Deploy the app to an EC2 instance](#deploy-the-app-to-an-ec2-instance)
     - [Create an IAM role](#create-an-iam-role)
     - [Create an ECR image](#create-and-ecr-image)
     - [Create a security group](#create-a-security-group)
@@ -19,7 +20,7 @@ This project is a simple approach to create a deployment process of a simple but
     - [Connect to the EC2 instance](#connect-to-the-ec2-instance)
     - [Finish instance setup and running the app](#finish-instance-setup-and-running-the-app)
     - [Access the deployed app](#access-the-deployed-app)
-4. [Appendix](#appendix)
+6. [Appendix](#appendix)
     - [What env_dependencies.sh does?](#what-env_dependenciessh-does)
     - [What setup_env.sh does?](#what-setup_envsh-does)
     - [What start.sh does?](#what-startsh-does)
@@ -35,6 +36,10 @@ When deployed to an EC2 instance, it's meant to run behind a [Nginx][nginx] prox
 **Note 1:** This is the complete example solution, meant to be deployed to an AWS EC2 instance. If you want just the REST API backend implementation, it can be found in the [api folder][churnprediction-api] of this repository.
 
 **Note 2:** This project is meant to be for learning purposes, for both readers and myself. So, if you find any problem or are aware of better ways of doing some of the things that I do here, please let me know. And don't forget to be kind.
+
+## Original kaggle kernel
+
+This kaggle kernel show my in-depth analysis about the Churn prediction problem. There you can find my reasonig about the design of the prediction model and a comparision with other classification models.
 
 ## Live demo
 
