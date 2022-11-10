@@ -39,7 +39,7 @@ When deployed to an EC2 instance, it's meant to run behind a [Nginx][nginx] prox
 
 ## Original kaggle kernel
 
-This kaggle kernel show my in-depth analysis about the Churn prediction problem. There you can find my reasonig about the design of the prediction model and a comparision with other classification models.
+[This kaggle kernel][kaggle-kernel] shows my in-depth analysis about the Churn prediction problem. There you can find my reasonig about the design of the prediction model and a comparision with other classification models.
 
 ## Live demo
 
@@ -386,6 +386,7 @@ This line runs the API image and exposes it through port 8000.
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
 [nginx]: https://www.nginx.com/
 [docker]: https://www.docker.com/
+[kaggle-kernel]: https://www.kaggle.com/code/thecamilovisk/simple-end-to-end-project
 [live-preview]: http://ec2-18-228-8-103.sa-east-1.compute.amazonaws.com
 [create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
 [docker-compose-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/blob/main/docker-compose.yml
