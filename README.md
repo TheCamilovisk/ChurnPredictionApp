@@ -1,5 +1,7 @@
 # ChurnPredictionApp
 
+This project is a simple approach to create a deployment process of a simple but complete Machine Learning App to AWS cloud services.
+
 ## Table of contents
 
 1. [Introduction](#introduction)
