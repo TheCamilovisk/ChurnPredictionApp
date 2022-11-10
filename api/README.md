@@ -46,12 +46,10 @@ I used [Pipenv][pipenv] to manage this project dependencies. There are 3 ways to
 
 First of all, you can set some environment variables if you plan to use an S3 bucket to store the prediction model, you'll need to have a accessable _S3 bucket_, where the model `.joblib` file will be stored. Then, set the following environment variables:
 
-```
-BUCKET_NAME=<YOUR_BUCKET_NAME>
-MODEL_ARTIFACT_PATH=<NAME_OF_YOUR_JOBLIB_FILE>
-AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>           (necessary only if you haven't set your AWS credentials file)
-AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>   (necessary only if you haven't set your AWS credentials file)
-```
+<pre><code>BUCKET_NAME=<b>YOUR_BUCKET_NAME</b>
+MODEL_ARTIFACT_PATH=<b>NAME_OF_YOUR_JOBLIB_FILE</b>
+AWS_ACCESS_KEY_ID=<b>AWS_ACCESS_KEY_ID</b>           (necessary only if you haven't set your AWS credentials file)
+AWS_SECRET_ACCESS_KEY=<b>AWS_SECRET_ACCESS_KEY</b>   (necessary only if you haven't set your AWS credentials file)</code></pre>
 
 If you want to know more about how to setup your AWS credentials file, check [this link][aws_credentials].
 
@@ -78,12 +76,12 @@ and the server will start. You can also supply the `--reload` argument, so the [
 This is a good **deployment** option, as the dependencies installation and resource management is managed by Docker. You can also develop / customize the project in this mode, but this is not as straighforward.
 
 First you need to build the image with the command `docker build -t churnprediction-api:latest .`. After that run:
-```
-docker run -it -p 8000:<HOST_PORT> \
--e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
--e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
-churnprediction-api:latest
-```
+
+<pre><code>docker run -it -p 8000:<b>HOST_PORT</b> \
+-e AWS_ACCESS_KEY_ID=<b>AWS_ACCESS_KEY_ID</b> \
+-e AWS_SECRET_ACCESS_KEY=<b>AWS_SECRET_ACCESS_KEY</b> \
+churnprediction-api:latest</code></pre>
+
 Where `HOST_PORT` is the port in your host machine that you want to access the API through, `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` are[your AWS ID and secret][aws_credentials]. Note that for this execution option to work, you must to have a S3 bucket with a pre-trained model `.joblib` in it.
 
 ## API documentation
@@ -135,11 +133,9 @@ This will create the model `.joblib` file inside the _model_ (also in root direc
 
 With the model file in the right place, you don't need any AWS connection at all, and can opt to not set the [environment variables](#setting-environment-variables). This is also true when using the Docker image, as long as you set a volume pointing to the _models_ folder to the right place in the container. For example, you can run the following command:
 
-```
-docker run -it -p 8000:8000 \
--v <MODELS_FOLDER_LOCATION>:/app/models \
-churnprediction-api:latest
-```
+<pre><code>docker run -it -p 8000:8000 \
+-v <b>MODELS_FOLDER_LOCATION</b>:/app/models \
+churnprediction-api:latest</code></pre>
 
 this will make the application used the existing `.joblib` file instead of download a new one everytime it starts. This is greate if you're customizing this project and want to just test the Docker image.
 
