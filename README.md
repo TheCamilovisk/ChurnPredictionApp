@@ -291,6 +291,28 @@ Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 D
 
 ### What env_dependencies.sh does?
 
+This script is responsible to install [Docker][docker] and NGINX[nginx] to EC2 instance. It also adds the default user (ec2-user) to the docker group, so the user doesn't need *super user* previleges when running a docker command.
+
+```
+sudo amazon-linux-extras install -y docker
+```
+
+This line installs the **docker** package from the oficial Amazon repositories.
+
+```
+sudo amazon-linux-extras install -y nginx1
+```
+
+In the same way as the last command, this line install NGINX.
+
+```
+sudo gpasswd -a ${USER} docker
+```
+
+This line adds the **current user** (supplied by the **USER** environment variable) the **docker** group.
+
+**Note:** User group modifications only take effect in the next login to the host system. This is why I instructed you to, after executing this script, logout and login right after during the [EC2 instance setup](#finish-instance-setup-and-running-the-app). So, don't skip this setp.
+
 ### What setup_env.sh does?
 
 ### What start.sh does?
@@ -299,6 +321,7 @@ Finally 🙌️, it's time to access the deployed app. Open the [instance IPv4 D
 
 [churnprediction-api]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api
 [nginx]: https://www.nginx.com/
+[docker]: https://www.docker.com/
 [live-preview]: http://ec2-18-228-46-88.sa-east-1.compute.amazonaws.com
 [create-model-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/tree/main/api#creating-the-model-file
 [docker-compose-file]: https://github.com/TheCamilovisk/ChurnPredictionApp/blob/main/docker-compose.yml
