@@ -5,5 +5,7 @@ sudo service nginx restart
 
 sudo service docker restart
 
-aws ecr get-login-password  --region sa-east-1 | docker login --username AWS --password-stdin 877885770422.dkr.ecr.sa-east-1.amazonaws.com
-docker pull 877885770422.dkr.ecr.sa-east-1.amazonaws.com/churn_prediction_api:latest
+ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
+
+aws ecr get-login-password  --region sa-east-1 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
+docker pull $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/churn_prediction_api:latest
