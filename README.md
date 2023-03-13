@@ -41,10 +41,6 @@ When deployed to an EC2 instance, it's meant to run behind a [Nginx][nginx] prox
 
 [This kaggle kernel][kaggle-kernel] shows my in-depth analysis about the Churn prediction problem. There you can find my reasonig about the design of the prediction model and a comparision with other classification models.
 
-## Live demo
-
-You can check the working deployed app by accessing [this link][live-preview].
-
 ## Run locally
 
 First of all, before you deploy this solution to an EC2 instance, you can test it locally on you machine. For this, enter the api folder, and follow the instructions on how to [create the model file][create-model-file] used for inference. You can either choose to use the created model file or save it to an S3 bucket.
